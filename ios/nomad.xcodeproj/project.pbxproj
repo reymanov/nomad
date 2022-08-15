@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* nomadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* nomadTests.m */; };
+		0C41087437AF2D1E84FA330D /* libPods-nomad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F82357C349836E124CCB2A0A /* libPods-nomad.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		37B8E51378F12B0C033B52CB /* libPods-nomad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A42F2551C86186AB2D90F7 /* libPods-nomad.a */; };
+		277C7721B0194F5B8D3D01E5 /* Satisfy-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D44A3A86CA4448C68F5A76EF /* Satisfy-Regular.ttf */; };
+		6775E896EEC1459496B3DE77 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D1C023FD38F4F1192D059C5 /* Lato-Light.ttf */; };
+		6C8F069241494E40949C32BD /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 239DBA7BEBA54D28AD809374 /* Lato-Bold.ttf */; };
+		7F3AF6ABBFB089C05B418AE7 /* libPods-nomad-nomadTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C7A6E7CFB252EE965653724 /* libPods-nomad-nomadTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		C4462DE7DCA91E043E00174B /* libPods-nomad-nomadTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8D0560D7DBC1A3BAC9243C /* libPods-nomad-nomadTests.a */; };
+		C7F2B8013FA04F7FBC62CB36 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5624FD1809343E68751683D /* Lato-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,26 +31,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		004879E6E6BBD4B490095374 /* Pods-nomad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nomad.debug.xcconfig"; path = "Target Support Files/Pods-nomad/Pods-nomad.debug.xcconfig"; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* nomadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nomadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* nomadTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nomadTests.m; sourceTree = "<group>"; };
-		0B8D0560D7DBC1A3BAC9243C /* libPods-nomad-nomadTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nomad-nomadTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D1C023FD38F4F1192D059C5 /* Lato-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Light.ttf"; path = "../src/assets/fonts/Lato-Light.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* nomad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nomad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = nomad/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = nomad/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = nomad/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = nomad/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = nomad/main.m; sourceTree = "<group>"; };
-		21B6DE49C5C18BDF90E3E7F0 /* Pods-nomad-nomadTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nomad-nomadTests.debug.xcconfig"; path = "Target Support Files/Pods-nomad-nomadTests/Pods-nomad-nomadTests.debug.xcconfig"; sourceTree = "<group>"; };
-		41E2EB9B92FF8F00012C3787 /* Pods-nomad-nomadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nomad-nomadTests.release.xcconfig"; path = "Target Support Files/Pods-nomad-nomadTests/Pods-nomad-nomadTests.release.xcconfig"; sourceTree = "<group>"; };
+		239DBA7BEBA54D28AD809374 /* Lato-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Bold.ttf"; path = "../src/assets/fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
+		6D4EC8069969F95D78068E3F /* Pods-nomad-nomadTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nomad-nomadTests.release.xcconfig"; path = "Target Support Files/Pods-nomad-nomadTests/Pods-nomad-nomadTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = nomad/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		88885DC67226104CB21A45FD /* Pods-nomad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nomad.release.xcconfig"; path = "Target Support Files/Pods-nomad/Pods-nomad.release.xcconfig"; sourceTree = "<group>"; };
+		8C7A6E7CFB252EE965653724 /* libPods-nomad-nomadTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nomad-nomadTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8389C428A84DE60037EC90 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		8C8389C528A84DEF0037EC90 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		8C8389C628A84DFD0037EC90 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		B5D6ABB3F826992739D62539 /* Pods-nomad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nomad.release.xcconfig"; path = "Target Support Files/Pods-nomad/Pods-nomad.release.xcconfig"; sourceTree = "<group>"; };
-		E245559F73A979F2A77BBDBB /* Pods-nomad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nomad.debug.xcconfig"; path = "Target Support Files/Pods-nomad/Pods-nomad.debug.xcconfig"; sourceTree = "<group>"; };
+		B5624FD1809343E68751683D /* Lato-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Regular.ttf"; path = "../src/assets/fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
+		BD9B8D73DC1008B4D01B175F /* Pods-nomad-nomadTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nomad-nomadTests.debug.xcconfig"; path = "Target Support Files/Pods-nomad-nomadTests/Pods-nomad-nomadTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D44A3A86CA4448C68F5A76EF /* Satisfy-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Satisfy-Regular.ttf"; path = "../src/assets/fonts/Satisfy-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F0A42F2551C86186AB2D90F7 /* libPods-nomad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nomad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F82357C349836E124CCB2A0A /* libPods-nomad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nomad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4462DE7DCA91E043E00174B /* libPods-nomad-nomadTests.a in Frameworks */,
+				7F3AF6ABBFB089C05B418AE7 /* libPods-nomad-nomadTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37B8E51378F12B0C033B52CB /* libPods-nomad.a in Frameworks */,
+				0C41087437AF2D1E84FA330D /* libPods-nomad.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +94,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0F26EB47593D459AADBDCCF9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				239DBA7BEBA54D28AD809374 /* Lato-Bold.ttf */,
+				0D1C023FD38F4F1192D059C5 /* Lato-Light.ttf */,
+				B5624FD1809343E68751683D /* Lato-Regular.ttf */,
+				D44A3A86CA4448C68F5A76EF /* Satisfy-Regular.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* nomad */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,8 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				F0A42F2551C86186AB2D90F7 /* libPods-nomad.a */,
-				0B8D0560D7DBC1A3BAC9243C /* libPods-nomad-nomadTests.a */,
+				F82357C349836E124CCB2A0A /* libPods-nomad.a */,
+				8C7A6E7CFB252EE965653724 /* libPods-nomad-nomadTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -126,6 +146,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				0F26EB47593D459AADBDCCF9 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -154,10 +175,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E245559F73A979F2A77BBDBB /* Pods-nomad.debug.xcconfig */,
-				B5D6ABB3F826992739D62539 /* Pods-nomad.release.xcconfig */,
-				21B6DE49C5C18BDF90E3E7F0 /* Pods-nomad-nomadTests.debug.xcconfig */,
-				41E2EB9B92FF8F00012C3787 /* Pods-nomad-nomadTests.release.xcconfig */,
+				004879E6E6BBD4B490095374 /* Pods-nomad.debug.xcconfig */,
+				88885DC67226104CB21A45FD /* Pods-nomad.release.xcconfig */,
+				BD9B8D73DC1008B4D01B175F /* Pods-nomad-nomadTests.debug.xcconfig */,
+				6D4EC8069969F95D78068E3F /* Pods-nomad-nomadTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -169,12 +190,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "nomadTests" */;
 			buildPhases = (
-				BB385FA4EFF80775CCD9905D /* [CP] Check Pods Manifest.lock */,
+				265CC433D07E4DD46A0F308C /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				F2E37B67AF0FD16D3D281E8F /* [CP] Embed Pods Frameworks */,
-				E2549DD1D26159F11308D658 /* [CP] Copy Pods Resources */,
+				1BEB61D1335F84A27A8FE09F /* [CP] Embed Pods Frameworks */,
+				E1BBE9F944573CF99D31D25E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -190,14 +211,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "nomad" */;
 			buildPhases = (
-				B3CEA9861C5855F4207F40EA /* [CP] Check Pods Manifest.lock */,
+				042AB10CFD8C2220C841B4FF /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				A2B347F632A4A33E329A2039 /* [CP] Embed Pods Frameworks */,
-				E811443CA058216D3F7895C8 /* [CP] Copy Pods Resources */,
+				44B22C92063EE29C15337D17 /* [CP] Embed Pods Frameworks */,
+				171E0E98E4D746B2FEA82967 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -258,6 +279,10 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				6C8F069241494E40949C32BD /* Lato-Bold.ttf in Resources */,
+				6775E896EEC1459496B3DE77 /* Lato-Light.ttf in Resources */,
+				C7F2B8013FA04F7FBC62CB36 /* Lato-Regular.ttf in Resources */,
+				277C7721B0194F5B8D3D01E5 /* Satisfy-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,24 +305,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		A2B347F632A4A33E329A2039 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nomad/Pods-nomad-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nomad/Pods-nomad-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nomad/Pods-nomad-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B3CEA9861C5855F4207F40EA /* [CP] Check Pods Manifest.lock */ = {
+		042AB10CFD8C2220C841B4FF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -319,7 +327,41 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BB385FA4EFF80775CCD9905D /* [CP] Check Pods Manifest.lock */ = {
+		171E0E98E4D746B2FEA82967 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nomad/Pods-nomad-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nomad/Pods-nomad-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nomad/Pods-nomad-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1BEB61D1335F84A27A8FE09F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nomad-nomadTests/Pods-nomad-nomadTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nomad-nomadTests/Pods-nomad-nomadTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nomad-nomadTests/Pods-nomad-nomadTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		265CC433D07E4DD46A0F308C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -341,7 +383,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E2549DD1D26159F11308D658 /* [CP] Copy Pods Resources */ = {
+		44B22C92063EE29C15337D17 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nomad/Pods-nomad-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nomad/Pods-nomad-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nomad/Pods-nomad-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1BBE9F944573CF99D31D25E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -356,40 +415,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nomad-nomadTests/Pods-nomad-nomadTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E811443CA058216D3F7895C8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nomad/Pods-nomad-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nomad/Pods-nomad-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nomad/Pods-nomad-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F2E37B67AF0FD16D3D281E8F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nomad-nomadTests/Pods-nomad-nomadTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nomad-nomadTests/Pods-nomad-nomadTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nomad-nomadTests/Pods-nomad-nomadTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -444,7 +469,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21B6DE49C5C18BDF90E3E7F0 /* Pods-nomad-nomadTests.debug.xcconfig */;
+			baseConfigurationReference = BD9B8D73DC1008B4D01B175F /* Pods-nomad-nomadTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -471,7 +496,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 41E2EB9B92FF8F00012C3787 /* Pods-nomad-nomadTests.release.xcconfig */;
+			baseConfigurationReference = 6D4EC8069969F95D78068E3F /* Pods-nomad-nomadTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -495,7 +520,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E245559F73A979F2A77BBDBB /* Pods-nomad.debug.xcconfig */;
+			baseConfigurationReference = 004879E6E6BBD4B490095374 /* Pods-nomad.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -522,7 +547,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B5D6ABB3F826992739D62539 /* Pods-nomad.release.xcconfig */;
+			baseConfigurationReference = 88885DC67226104CB21A45FD /* Pods-nomad.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
