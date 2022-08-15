@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { Button, Input } from 'native-base';
 import {
     ActivityIndicator,
     ImageBackground,
@@ -10,8 +11,6 @@ import {
     TouchableWithoutFeedback,
     View,
 } from 'react-native';
-// import { SignIn, SignUp } from '@src/utils/Auth';
-import { Button, Input } from 'native-base';
 import Animated, {
     useAnimatedStyle,
     useSharedValue,
@@ -19,7 +18,8 @@ import Animated, {
     withTiming,
 } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Fonts, Sizes } from '@src/constants';
+import { SignIn, SignUp } from '@utils/Auth';
+import { Fonts, Sizes } from '@constants/index';
 
 const AuthScreen: React.FC = () => {
     const [isLoginMode, setIsLoginMode] = useState(true);
@@ -67,12 +67,12 @@ const AuthScreen: React.FC = () => {
 
     const handleSignIn = () => {
         setIsLoading(true);
-        // SignIn(email, password).then(() => setIsLoading(false));
+        SignIn(email, password).then(() => setIsLoading(false));
     };
 
     const handleSignUp = () => {
         setIsLoading(true);
-        // SignUp(email, password).then(() => setIsLoading(false));
+        SignUp(email, password).then(() => setIsLoading(false));
     };
 
     const getTitle = useMemo(() => {
@@ -229,6 +229,7 @@ const styles = StyleSheet.create({
     },
     button: {
         width: '100%',
+        height: 42,
         alignItems: 'center',
         justifyContent: 'center',
     },

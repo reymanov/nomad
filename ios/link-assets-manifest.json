@@ -2,6 +2,10 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/fonts/Ionicons.ttf",
+      "sha1": "b5281fbfa43129abc3e412dd938cfcf0b77de999"
+    },
+    {
       "path": "src/assets/fonts/Lato-Bold.ttf",
       "sha1": "d67fee08c79a82ce375ab9629ae5a903da8bb321"
     },
@@ -12,6 +16,14 @@
     {
       "path": "src/assets/fonts/Lato-Regular.ttf",
       "sha1": "83dc5921761a7c3d1ee7badba3fc7e1e1f5ed803"
+    },
+    {
+      "path": "src/assets/fonts/MaterialCommunityIcons.ttf",
+      "sha1": "4c2a838b00dbb5e8bb1b368fce0de534e8eb241c"
+    },
+    {
+      "path": "src/assets/fonts/MaterialIcons.ttf",
+      "sha1": "1943803d652750c8ec60415f1e57401c70e72d25"
     },
     {
       "path": "src/assets/fonts/Satisfy-Regular.ttf",

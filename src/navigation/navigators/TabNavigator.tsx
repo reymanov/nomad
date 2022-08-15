@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SettingsScreen from '@screens/settings/SettingsScreen';
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useColorMode, useTheme } from 'native-base';
 import { HomeStack, MapStack } from '../stacks';
 
@@ -25,22 +25,26 @@ export const TabNavigator: React.FC = () => {
                     backgroundColor: bgColor,
                     borderTopWidth: 0,
                 },
-                // tabBarIcon: ({ focused }) => {
-                //     let iconName = '';
-                //     let iconSize = 28;
-                //     let iconColor = focused ? textColor : colors.gray[500];
+                tabBarIcon: ({ focused }) => {
+                    let iconName = '';
+                    let iconSize = 24;
+                    let iconColor = focused ? textColor : colors.gray[500];
 
-                //     if (route.name === 'Home') iconName = 'home';
-                //     if (route.name === 'Settings') iconName = 'gear';
-                //     if (route.name === 'Map') (iconName = 'map'), (iconSize = 20);
+                    if (route.name === 'HomeTab') iconName = 'home';
+                    if (route.name === 'MapTab') iconName = 'map';
+                    if (route.name === 'SettingsTab') iconName = 'settings';
 
-                //     return <Icon name={iconName} size={iconSize} color={iconColor} />;
-                // },
+                    return <Icon name={iconName} size={iconSize} color={iconColor} />;
+                },
             })}
         >
-            <Tab.Screen name="Home" component={HomeStack} />
-            <Tab.Screen name="Map" component={MapStack} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
+            <Tab.Screen name="HomeTab" component={HomeStack} options={{ title: 'Home' }} />
+            <Tab.Screen name="MapTab" component={MapStack} options={{ title: 'Map' }} />
+            <Tab.Screen
+                name="SettingsTab"
+                component={SettingsScreen}
+                options={{ title: 'Settings' }}
+            />
         </Tab.Navigator>
     );
 };
