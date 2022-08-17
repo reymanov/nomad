@@ -1,7 +1,6 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Button, Input } from 'native-base';
 import {
-    ActivityIndicator,
     ImageBackground,
     Keyboard,
     KeyboardAvoidingView,
@@ -17,13 +16,14 @@ import Animated, {
     withSequence,
     withTiming,
 } from 'react-native-reanimated';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { SignIn, SignUp } from '@utils/Auth';
-import { Colors, Fonts, Sizes } from '@constants/index';
-import { BottomSheetModal } from '@gorhom/bottom-sheet';
-import { ForgotPasswordBottomSheet } from './components';
 
-const AuthScreen: React.FC = () => {
+import { signIn, signUp } from '@utils/Auth';
+import { AUTH_STACK } from '@navigation/types';
+import { Fonts, DEFAULT_HITSLOP, Sizes } from '@constants/index';
+
+export const AuthScreen: React.FC = () => {
     const [isSignInMode, setIsSignInMode] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState('');
@@ -32,8 +32,7 @@ const AuthScreen: React.FC = () => {
 
     const emailInputOffsetX = useSharedValue(0);
     const passwordInputOffsetX = useSharedValue(0);
-
-    const bottomSheetRef = useRef<BottomSheetModal>(null);
+    const { navigate } = useNavigation<any>();
 
     const currentHour = new Date().getHours();
     const isDayTime = currentHour >= 6 && currentHour < 18;
@@ -49,9 +48,12 @@ const AuthScreen: React.FC = () => {
     const shakeInput = (input: 'email' | 'password') => {
         const desiredInput = input === 'email' ? emailInputOffsetX : passwordInputOffsetX;
 
+        if (desiredInput.value !== 0) return;
+
         desiredInput.value = withSequence(
-            withTiming(6, { duration: 150 }),
-            withTiming(-6, { duration: 150 }),
+            withTiming(8, { duration: 150 }),
+            withTiming(-8, { duration: 150 }),
+            withTiming(8, { duration: 150 }),
             withTiming(0, { duration: 150 })
         );
     };
@@ -71,16 +73,12 @@ const AuthScreen: React.FC = () => {
 
     const handleSignIn = () => {
         setIsLoading(true);
-        SignIn(email, password).then(() => setIsLoading(false));
+        signIn(email, password).then(() => setIsLoading(false));
     };
 
     const handleSignUp = () => {
         setIsLoading(true);
-        SignUp(email, password).then(() => setIsLoading(false));
-    };
-
-    const handleForgotPassword = () => {
-        bottomSheetRef.current?.present();
+        signUp(email, password).then(() => setIsLoading(false));
     };
 
     const getTitle = useMemo(() => {
@@ -103,7 +101,7 @@ const AuthScreen: React.FC = () => {
                     <KeyboardAvoidingView
                         style={styles.container}
                         behavior="padding"
-                        keyboardVerticalOffset={-120}
+                        keyboardVerticalOffset={-140}
                     >
                         <Text style={styles.title}>{getTitle}</Text>
 
@@ -115,9 +113,10 @@ const AuthScreen: React.FC = () => {
                                     placeholder={'Email'}
                                     placeholderTextColor={'#fff'}
                                     selectionColor={'#fff'}
+                                    borderColor={'#fff'}
                                     value={email}
                                     onChangeText={setEmail}
-                                    textContentType={'emailAddress'}
+                                    keyboardType={'email-address'}
                                     InputLeftElement={
                                         <Icon name={'person'} size={Sizes.lg} color={'#fff'} />
                                     }
@@ -127,10 +126,11 @@ const AuthScreen: React.FC = () => {
                             <Animated.View style={[styles.inputContainer, animatedPassword]}>
                                 <Input
                                     style={styles.input}
-                                    variant="underlined"
-                                    placeholder="Password"
+                                    variant={'underlined'}
+                                    placeholder={'Password'}
                                     placeholderTextColor={'#fff'}
                                     selectionColor={'#fff'}
+                                    borderColor={'#fff'}
                                     value={password}
                                     onChangeText={setPassword}
                                     type={passwordVisible ? 'text' : 'password'}
@@ -157,7 +157,10 @@ const AuthScreen: React.FC = () => {
                                 />
                             </Animated.View>
 
-                            <TouchableOpacity onPress={handleForgotPassword}>
+                            <TouchableOpacity
+                                onPress={() => navigate(AUTH_STACK.ForgotPassword)}
+                                hitSlop={DEFAULT_HITSLOP}
+                            >
                                 <Text style={styles.forgotPassword}>Forgot Password ?</Text>
                             </TouchableOpacity>
 
@@ -165,49 +168,38 @@ const AuthScreen: React.FC = () => {
                                 {isSignInMode ? (
                                     <>
                                         <Button
-                                            rounded={'md'}
                                             style={styles.button}
-                                            disabled={isLoading}
+                                            isLoading={isLoading}
+                                            isDisabled={isLoading}
                                             variant={'outline'}
                                             onPress={() => onActionClick(handleSignIn)}
                                         >
-                                            {isLoading ? (
-                                                <ActivityIndicator />
-                                            ) : (
-                                                <Text style={styles.buttonText}>Sign in</Text>
-                                            )}
+                                            <Text style={styles.buttonText}>Sign in</Text>
                                         </Button>
                                         <TouchableOpacity onPress={() => setIsSignInMode(false)}>
                                             <Text style={styles.subText}>
-                                                Don't have account ?{' '}
-                                                <Text style={{ color: Colors.morningBlue }}>
-                                                    Sign up
-                                                </Text>
+                                                Don't have account ? <Text>Sign up</Text>
                                             </Text>
                                         </TouchableOpacity>
                                     </>
                                 ) : (
                                     <>
                                         <Button
-                                            rounded={'md'}
-                                            style={styles.button}
-                                            disabled={isLoading}
                                             variant={'outline'}
+                                            style={styles.button}
+                                            isLoading={isLoading}
+                                            isDisabled={isLoading}
                                             onPress={() => onActionClick(handleSignUp)}
                                         >
-                                            {isLoading ? (
-                                                <ActivityIndicator />
-                                            ) : (
-                                                <Text style={styles.buttonText}>Sign up</Text>
-                                            )}
+                                            <Text style={styles.buttonText}>Sign up</Text>
                                         </Button>
 
-                                        <TouchableOpacity onPress={() => setIsSignInMode(true)}>
+                                        <TouchableOpacity
+                                            onPress={() => setIsSignInMode(true)}
+                                            hitSlop={DEFAULT_HITSLOP}
+                                        >
                                             <Text style={styles.subText}>
-                                                Already have account ?{' '}
-                                                <Text style={{ color: Colors.morningBlue }}>
-                                                    Sign in
-                                                </Text>
+                                                Already have account ? <Text>Sign in</Text>
                                             </Text>
                                         </TouchableOpacity>
                                     </>
@@ -217,27 +209,16 @@ const AuthScreen: React.FC = () => {
                     </KeyboardAvoidingView>
                 </TouchableWithoutFeedback>
             </ImageBackground>
-
-            <ForgotPasswordBottomSheet
-                ref={bottomSheetRef}
-                snapPoints={['40%', '65%']}
-                onClose={() => bottomSheetRef.current?.close()}
-                onExpand={() => bottomSheetRef.current?.expand()}
-                onCollapse={() => bottomSheetRef.current?.collapse()}
-                children={null}
-            />
         </>
     );
 };
-
-export default AuthScreen;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'space-between',
         marginTop: '25%',
-        marginBottom: '20%',
+        marginBottom: 75,
         paddingHorizontal: Sizes.xxl,
     },
     title: {
@@ -247,7 +228,7 @@ const styles = StyleSheet.create({
         fontFamily: Fonts.SatisfyRegular,
     },
     inputContainer: {
-        marginBottom: Sizes.md,
+        marginBottom: Sizes.lg,
     },
     input: {
         color: '#fff',
@@ -255,7 +236,7 @@ const styles = StyleSheet.create({
         fontSize: Sizes.md,
     },
     forgotPassword: {
-        color: Colors.morningBlue,
+        color: '#fff',
         fontSize: Sizes.sm,
         alignSelf: 'flex-end',
     },
@@ -263,13 +244,16 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: '25%',
+        marginTop: '30%',
     },
     button: {
         width: '100%',
         height: 42,
+        borderRadius: Sizes.xxs,
         alignItems: 'center',
         justifyContent: 'center',
+        borderColor: '#fff',
+        marginBottom: Sizes.lg,
     },
     buttonText: {
         color: '#fff',
@@ -278,6 +262,5 @@ const styles = StyleSheet.create({
     subText: {
         color: '#fff',
         fontSize: Sizes.sm,
-        marginTop: Sizes.md,
     },
 });
