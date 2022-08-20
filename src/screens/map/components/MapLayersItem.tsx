@@ -1,8 +1,7 @@
-// import ThemedText from '@src/components/texts/ThemedText';
-import { View } from 'native-base';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ThemedText } from '@components/texts';
 
 interface Props {
     title: string;
@@ -11,14 +10,16 @@ interface Props {
 export const MapLayersItem: React.FC<Props> = ({ title }) => {
     return (
         <TouchableOpacity style={styles.container}>
-            <View style={styles.title}>{/* <ThemedText fontSize={16}>{title}</ThemedText> */}</View>
+            <View style={styles.title}>
+                <ThemedText>{title}</ThemedText>
+            </View>
         </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        width: 165,
+        width: 168,
         height: 100,
         borderRadius: 8,
         backgroundColor: 'lightgrey',
@@ -26,13 +27,12 @@ const styles = StyleSheet.create({
     },
     title: {
         width: '100%',
-        height: 28,
+        paddingVertical: 4,
+        paddingHorizontal: 12,
         position: 'absolute',
         bottom: 0,
         borderBottomLeftRadius: 8,
         borderBottomRightRadius: 8,
-        backgroundColor: 'darkgrey',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#999',
     },
 });

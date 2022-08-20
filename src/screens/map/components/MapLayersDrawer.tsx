@@ -1,44 +1,46 @@
 import React, { useCallback, useRef } from 'react';
-
-// import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
-// import { useSelectMapLayersDrawerState } from '@store/map/useMapSelectors';
-import { useDispatch } from 'react-redux';
-// import { mapActions } from '@store/map/mapSlice';
-import { useColorMode, useTheme } from 'native-base';
 import { StyleSheet, View } from 'react-native';
-import { MapLayersItem } from './MapLayersItem';
-// import ThemedText from '@components/texts/ThemedText';
+import { useDispatch } from 'react-redux';
+import { useColorMode, useTheme } from 'native-base';
+import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 
-export const MapLayersDrawer = () => {
+import { MapLayersItem } from './MapLayersItem';
+import { mapActions } from '@store/map/mapSlice';
+import { ThemedText } from '@components/texts';
+import { useSelectMapLayersDrawerState } from '@store/map/useMapSelectors';
+
+export const MapLayersDrawer: React.FC = () => {
     const dispatch = useDispatch();
     const { colorMode } = useColorMode();
     const { colors } = useTheme();
     const isDarkMode = colorMode === 'dark';
     const backgroundColor = isDarkMode ? colors.dark[50] : colors.dark[800];
-    // const isOpen = useSelectMapLayersDrawerState();
-    // const bottomSheetRef = useRef<BottomSheet>(null);
+    const isOpen = useSelectMapLayersDrawerState();
+    const bottomSheetRef = useRef<BottomSheet>(null);
 
-    const snapPoints = ['42%'];
+    const snapPoints = [320];
 
-    // const handleSheetChanges = useCallback((index: number) => {
-    //     if (index < 0) {
-    //         dispatch(mapActions.closeMapLayersDrawer());
-    //     }
-    // }, []);
+    const handleClose = () => {
+        dispatch(mapActions.closeMapLayersDrawer());
+    };
 
-    // // renders
-    // const renderBackdrop = useCallback(
-    //     props => <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} />,
-    //     []
-    // );
+    const renderBackdrop = useCallback(
+        (props: any) => (
+            <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} />
+        ),
+        []
+    );
     return (
         <>
-            {/* <BottomSheet
+            <BottomSheet
                 ref={bottomSheetRef}
                 index={isOpen ? 0 : -1}
                 snapPoints={snapPoints}
                 backdropComponent={renderBackdrop}
-                onChange={handleSheetChanges}
+                onClose={handleClose}
+                handleIndicatorStyle={{
+                    backgroundColor: isDarkMode ? colors.dark[400] : colors.dark[200],
+                }}
                 enablePanDownToClose={true}
                 backgroundStyle={{ backgroundColor }}
             >
@@ -51,12 +53,12 @@ export const MapLayersDrawer = () => {
 
                     <View style={styles.items}>
                         <MapLayersItem title="Standard" />
-                        <MapLayersItem title="Standard" />
-                        <MapLayersItem title="Standard" />
-                        <MapLayersItem title="Standard" />
+                        <MapLayersItem title="Dark" />
+                        <MapLayersItem title="Satelite" />
+                        <MapLayersItem title="Mixed" />
                     </View>
                 </View>
-            </BottomSheet> */}
+            </BottomSheet>
         </>
     );
 };

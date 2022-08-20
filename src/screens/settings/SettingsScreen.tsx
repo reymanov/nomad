@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Switch, useColorMode, useTheme } from 'native-base';
-// import ThemedText from '@components/texts/ThemedText';
+import { ThemedText } from '@components/texts';
 
 const SettingsScreen = () => {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -22,7 +22,7 @@ const SettingsScreen = () => {
     return (
         <SafeAreaView style={[styles.container, { backgroundColor }]}>
             <View>
-                {/* <ThemedText fontSize={36}>Settings</ThemedText> */}
+                <ThemedText fontSize={36}>Settings</ThemedText>
 
                 <Switch
                     onTrackColor={'cyan.600'}

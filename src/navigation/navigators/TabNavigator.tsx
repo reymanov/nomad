@@ -12,8 +12,8 @@ export const TabNavigator: React.FC = () => {
     const { colors } = useTheme();
 
     const isDarkMode = colorMode === 'dark';
-    const bgColor = isDarkMode ? colors.dark[50] : colors.dark[800];
-    const textColor = isDarkMode ? colors.dark[800] : colors.cyan[700];
+    const backgroundColor = isDarkMode ? colors.dark[50] : colors.dark[800];
+    const textColor = isDarkMode ? colors.dark[800] : colors.dark[200];
 
     return (
         <Tab.Navigator
@@ -22,13 +22,13 @@ export const TabNavigator: React.FC = () => {
                 tabBarActiveTintColor: textColor,
                 tabBarInactiveTintColor: colors.gray[400],
                 tabBarStyle: {
-                    backgroundColor: bgColor,
+                    backgroundColor,
                     borderTopWidth: 0,
                 },
                 tabBarIcon: ({ focused }) => {
                     let iconName = '';
                     let iconSize = 24;
-                    let iconColor = focused ? textColor : colors.gray[500];
+                    let iconColor = focused ? textColor : colors.dark[500];
 
                     if (route.name === 'HomeTab') iconName = 'home';
                     if (route.name === 'MapTab') iconName = 'map';

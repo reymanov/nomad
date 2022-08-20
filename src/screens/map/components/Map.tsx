@@ -1,17 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import MapView, { PROVIDER_GOOGLE, Region } from 'react-native-maps';
 
-// import Geolocation from 'react-native-geolocation-service';
+import Geolocation from 'react-native-geolocation-service';
 import { StyleSheet } from 'react-native';
 import { useColorMode } from 'native-base';
 import { dark, light } from '@constants/mapThemes';
-// import MapControls from './MapControls';
+import { MapControls } from './MapControls';
 
 export const Map = () => {
     const [region, setRegion] = useState<Region>();
     const [isMapRotated, setIsMapRotated] = useState(false);
     const { colorMode } = useColorMode();
-    const isDarkMode = colorMode === 'dark';
 
     const mapRef = useRef<MapView>(null);
     const initialRegion = {
@@ -21,31 +20,31 @@ export const Map = () => {
         longitudeDelta: 0.04,
     };
 
-    const mapStyle = isDarkMode ? dark : light;
+    const mapStyle = light;
 
     const focusUserLocation = () => {
-        // Geolocation.getCurrentPosition(position => {
-        //     const { latitude, longitude } = position.coords;
-        //     const region = {
-        //         ...initialRegion,
-        //         latitude: latitude,
-        //         longitude: longitude,
-        //     };
-        //     if (mapRef.current) {
-        //         mapRef.current.animateToRegion(region, 200);
-        //     }
-        // });
+        Geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            const region = {
+                ...initialRegion,
+                latitude: latitude,
+                longitude: longitude,
+            };
+            if (mapRef.current) {
+                mapRef.current.animateToRegion(region, 200);
+            }
+        });
     };
 
     useEffect(() => {
-        // Geolocation.getCurrentPosition(position => {
-        //     const { latitude, longitude } = position.coords;
-        //     setRegion({
-        //         ...initialRegion,
-        //         latitude: latitude,
-        //         longitude: longitude,
-        //     });
-        // });
+        Geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            setRegion({
+                ...initialRegion,
+                latitude: latitude,
+                longitude: longitude,
+            });
+        });
     }, []);
 
     const handleRegionChangeComplete = async () => {
@@ -74,11 +73,11 @@ export const Map = () => {
                 customMapStyle={mapStyle}
                 onRegionChangeComplete={handleRegionChangeComplete}
             />
-            {/* <MapControls
-                isCompassDisplayed={isMapRotated}
+            <MapControls
+                isMapRotated={isMapRotated}
                 onLocationPress={focusUserLocation}
                 onCompassPress={rotateNorth}
-            /> */}
+            />
         </>
     );
 };
@@ -88,7 +87,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
         right: 0,
-        top: -25,
+        top: 0,
         bottom: -25,
         zIndex: 0,
     },
