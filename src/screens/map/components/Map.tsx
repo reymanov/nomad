@@ -1,16 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
-import MapView, { PROVIDER_GOOGLE, Region } from 'react-native-maps';
+import MapView, { MAP_TYPES, PROVIDER_GOOGLE, Region } from 'react-native-maps';
 
 import Geolocation from 'react-native-geolocation-service';
 import { StyleSheet } from 'react-native';
-import { useColorMode } from 'native-base';
-import { dark, light } from '@constants/mapThemes';
 import { MapControls } from './MapControls';
+import { useSelectMapStyle } from '@store/map/useMapSelectors';
+import { dark } from '@constants/index';
+import { MapType } from '@store/map/mapSlice';
 
 export const Map = () => {
     const [region, setRegion] = useState<Region>();
     const [isMapRotated, setIsMapRotated] = useState(false);
-    const { colorMode } = useColorMode();
+    const mapStyle = useSelectMapStyle();
 
     const mapRef = useRef<MapView>(null);
     const initialRegion = {
@@ -19,8 +20,6 @@ export const Map = () => {
         latitudeDelta: 0.09,
         longitudeDelta: 0.04,
     };
-
-    const mapStyle = light;
 
     const focusUserLocation = () => {
         Geolocation.getCurrentPosition(position => {
@@ -62,6 +61,8 @@ export const Map = () => {
         mapRef.current?.animateCamera({ heading: 0 });
     };
 
+    const mapType = mapStyle === MapType.DARK ? MAP_TYPES.STANDARD : MAP_TYPES[mapStyle];
+
     return (
         <>
             <MapView
@@ -70,7 +71,8 @@ export const Map = () => {
                 initialRegion={region}
                 showsUserLocation={true}
                 provider={PROVIDER_GOOGLE}
-                customMapStyle={mapStyle}
+                mapType={mapType}
+                customMapStyle={mapStyle === MapType.DARK ? dark : undefined}
                 onRegionChangeComplete={handleRegionChangeComplete}
             />
             <MapControls

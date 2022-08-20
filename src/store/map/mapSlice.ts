@@ -2,14 +2,23 @@ import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Camera } from 'react-native-maps';
 import { AppState } from '@store/index';
 
+export enum MapType {
+    STANDARD = 'STANDARD',
+    DARK = 'DARK',
+    SATELLITE = 'SATELLITE',
+    HYBRID = 'HYBRID',
+}
+
 interface MapState {
-    isMapLayersDrawerOpen: boolean;
     camera: Camera | null;
+    isMapLayersDrawerOpen: boolean;
+    mapStyle: MapType;
 }
 
 const initialState: MapState = {
-    isMapLayersDrawerOpen: false,
     camera: null,
+    isMapLayersDrawerOpen: false,
+    mapStyle: MapType.STANDARD,
 };
 
 export const mapSlice = createSlice({
@@ -25,6 +34,9 @@ export const mapSlice = createSlice({
         setCamera: (state, action: PayloadAction<Camera>) => {
             state.camera = action.payload;
         },
+        setMapStyle: (state, action: PayloadAction<MapType>) => {
+            state.mapStyle = action.payload;
+        },
     },
 });
 
@@ -38,8 +50,13 @@ const selectMapLayersState = createSelector([getMapState], state => {
     return state.isMapLayersDrawerOpen;
 });
 
+const selectMapStyle = createSelector([getMapState], state => {
+    return state.mapStyle;
+});
+
 export const mapSelectors = {
     selectMapLayersState,
+    selectMapStyle,
 };
 
 export default mapSlice.reducer;
