@@ -8,6 +8,7 @@ import AuthHandler from '@handlers/AuthHandler';
 import { RootNavigator } from '@navigation/navigators';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { colorModeManager } from '@utils/ColorCodeManager';
+import StatusBar from './components/StatusBar';
 
 const config = { useSystemColorMode: true };
 const customTheme = extendTheme({ config });
@@ -17,6 +18,7 @@ const App: React.FC = () => {
         <Provider store={store}>
             <NativeBaseProvider theme={customTheme} colorModeManager={colorModeManager}>
                 <BottomSheetModalProvider>
+                    <StatusBar />
                     <RootNavigator />
                     <AuthHandler />
                 </BottomSheetModalProvider>

@@ -9,6 +9,7 @@ module.exports = function (api) {
                     '@src': './src',
                     '@assets': './src/assets',
                     '@components': './src/components',
+                    '@containers': './src/containers',
                     '@constants': './src/constants',
                     '@navigation': './src/navigation',
                     '@handlers': './src/handlers',

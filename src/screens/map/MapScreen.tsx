@@ -3,7 +3,7 @@ import { useColorMode, useTheme } from 'native-base';
 import { StyleSheet, View } from 'react-native';
 import { Map, MapLayersDrawer } from './components';
 
-const MapScreen = () => {
+const MapScreen: React.FC = () => {
     const { colorMode } = useColorMode();
     const { colors } = useTheme();
     const isDarkMode = colorMode === 'dark';

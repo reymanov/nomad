@@ -3,11 +3,13 @@ import { useDispatch } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { Button, Switch, Text, useColorMode } from 'native-base';
-import { ThemedText } from '@components/texts';
-import { ThemedScreenContainer } from '@components/containers';
-import { mapActions, MapType } from '@src/store/map/mapSlice';
+
+import { Sizes } from '@constants/index';
 import { writeMapType } from '@utils/Storage';
-import { useSelectUserDetails } from '@src/store/session/useSessionSelectors';
+import { ThemedText } from '@components/texts';
+import { ThemedScreenContainer } from '@src/containers';
+import { mapActions, MapType } from '@store/map/mapSlice';
+import { useSelectUserDetails } from '@store/session/useSessionSelectors';
 
 const SettingsScreen = () => {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -79,15 +81,15 @@ const SettingsScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 24,
-        paddingHorizontal: 16,
+        paddingTop: Sizes.lg,
+        paddingHorizontal: Sizes.md,
         justifyContent: 'space-between',
     },
     section: {
-        marginTop: 32,
+        marginTop: Sizes.xl,
     },
     row: {
-        marginTop: 16,
+        marginTop: Sizes.md,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
