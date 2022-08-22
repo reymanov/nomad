@@ -4,11 +4,11 @@ import { StyleSheet, View } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { Button, Switch, Text, useColorMode } from 'native-base';
 
+// import { writeMapType } from '@utils/Storage';
+// import { mapActions, MapType } from '@store/map/mapSlice';
 import { Sizes } from '@constants/index';
-import { writeMapType } from '@utils/Storage';
 import { ThemedText } from '@components/texts';
-import { ThemedScreenContainer } from '@src/containers';
-import { mapActions, MapType } from '@store/map/mapSlice';
+import { ThemedScreenContainer } from '@containers/index';
 import { useSelectUserDetails } from '@store/session/useSessionSelectors';
 
 const SettingsScreen = () => {
@@ -25,13 +25,13 @@ const SettingsScreen = () => {
     };
 
     const handleToggleColorMode = () => {
-        if (colorMode === 'light') {
-            dispatch(mapActions.setMapStyle(MapType.DARK));
-            writeMapType(MapType.DARK);
-        } else {
-            dispatch(mapActions.setMapStyle(MapType.STANDARD));
-            writeMapType(MapType.STANDARD);
-        }
+        // if (colorMode === 'light') {
+        //     dispatch(mapActions.setMapStyle(MapType.DARK));
+        //     writeMapType(MapType.DARK);
+        // } else {
+        //     dispatch(mapActions.setMapStyle(MapType.STANDARD));
+        //     writeMapType(MapType.STANDARD);
+        // }
         toggleColorMode();
     };
 

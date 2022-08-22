@@ -22,7 +22,7 @@ export const Map = () => {
         latitude: 0,
         longitude: 0,
         latitudeDelta: 2,
-        longitudeDelta: 28,
+        longitudeDelta: 24,
     };
 
     const focusUserLocation = () => {
@@ -59,10 +59,10 @@ export const Map = () => {
     const handleRegionChange = async () => {
         if (!mapRef) return;
         const camera = await mapRef.current?.getCamera();
-        if (camera) setCameraHeading(camera.heading);
+        if (camera && camera.heading !== cameraHeading) setCameraHeading(camera.heading);
     };
 
-    const throttledRegionChange = throttle(handleRegionChange, 100);
+    const throttledRegionChange = throttle(handleRegionChange, 60);
 
     const rotateNorth = () => {
         mapRef.current?.animateCamera({ heading: 0 });
@@ -86,7 +86,7 @@ export const Map = () => {
                 provider={PROVIDER_GOOGLE}
                 mapType={mapType}
                 maxZoomLevel={18}
-                minZoomLevel={2}
+                minZoomLevel={3}
                 customMapStyle={customMapStyle}
                 onRegionChange={throttledRegionChange}
             />
