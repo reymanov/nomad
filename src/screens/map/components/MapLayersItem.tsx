@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
         borderColor: '#0891b2',
     },
     label: {
-        opacity: 0.9,
         width: '100%',
         paddingVertical: 4,
         paddingHorizontal: 12,

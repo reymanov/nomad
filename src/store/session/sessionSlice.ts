@@ -26,7 +26,6 @@ export const sessionSlice = createSlice({
     initialState,
     reducers: {
         setUserDetails: (store, action: PayloadAction<UserData>) => {
-            console.log(action.payload);
             const { displayName, email, emailVerified, phoneNumber, photoURL } = action.payload;
             store.isAuthenticated = true;
             store.userName = displayName;

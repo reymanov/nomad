@@ -54,9 +54,14 @@ const selectMapStyle = createSelector([getMapState], state => {
     return state.mapStyle;
 });
 
+const selectCamera = createSelector([getMapState], state => {
+    return state.camera;
+});
+
 export const mapSelectors = {
     selectMapLayersState,
     selectMapStyle,
+    selectCamera,
 };
 
 export default mapSlice.reducer;

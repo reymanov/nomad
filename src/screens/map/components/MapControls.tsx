@@ -2,17 +2,17 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useColorMode, useTheme } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
 import { mapActions } from '@store/map/mapSlice';
 
 interface IMapControls {
-    isMapRotated: boolean;
+    cameraHeading: number;
     onLocationPress: () => void;
     onCompassPress: () => void;
 }
 
 export const MapControls: React.FC<IMapControls> = ({
-    isMapRotated,
+    cameraHeading,
     onLocationPress,
     onCompassPress,
 }) => {
@@ -20,18 +20,16 @@ export const MapControls: React.FC<IMapControls> = ({
     const { colors } = useTheme();
     const dispatch = useDispatch();
 
+    const isMapRotated = cameraHeading !== 0;
     const isDarkMode = colorMode === 'dark';
     const backgroundColor = isDarkMode ? colors.dark[50] : colors.dark[800];
     const iconColor = isDarkMode ? colors.dark[800] : colors.dark[100];
-    const handleMapLayersClick = () => {
-        dispatch(mapActions.openMapLayersDrawer());
-    };
 
     return (
         <SafeAreaView style={styles.container}>
             <TouchableOpacity
                 style={[styles.control, { backgroundColor }]}
-                onPress={handleMapLayersClick}
+                onPress={() => dispatch(mapActions.openMapLayersDrawer())}
             >
                 <Icon name={'earth'} size={22} color={iconColor} />
             </TouchableOpacity>
@@ -48,7 +46,12 @@ export const MapControls: React.FC<IMapControls> = ({
                     style={[styles.control, { backgroundColor }]}
                     onPress={onCompassPress}
                 >
-                    <Icon name={'compass'} size={24} color={iconColor} />
+                    <Icon
+                        name={'compass'}
+                        size={24}
+                        color={iconColor}
+                        style={{ transform: [{ rotate: `-${cameraHeading}deg` }] }}
+                    />
                 </TouchableOpacity>
             )}
         </SafeAreaView>

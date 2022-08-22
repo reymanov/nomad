@@ -9,3 +9,7 @@ export const useSelectMapLayersDrawerState = () => {
 export const useSelectMapStyle = () => {
     return useSelector((state: AppState) => mapSelectors.selectMapStyle(state));
 };
+
+export const useSelectCamera = () => {
+    return useSelector((state: AppState) => mapSelectors.selectCamera(state));
+};
