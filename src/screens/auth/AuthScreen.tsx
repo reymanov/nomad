@@ -19,23 +19,33 @@ import Animated, {
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { signIn, signUp } from '@utils/Auth';
+import { signIn, signUp, updateProfile } from '@utils/Auth';
 import { AUTH_STACK } from '@navigation/types';
-import { Fonts, DEFAULT_HITSLOP, Sizes } from '@constants/index';
+import { Fonts, HITSLOP, Sizes, emailRegex, Colors } from '@constants/index';
 
 export const AuthScreen: React.FC = () => {
     const [isSignInMode, setIsSignInMode] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+    const [username, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const { navigate } = useNavigation<any>();
 
+    const usernameInputOffsetX = useSharedValue(0);
     const emailInputOffsetX = useSharedValue(0);
     const passwordInputOffsetX = useSharedValue(0);
-    const { navigate } = useNavigation<any>();
+
+    const isUsernameValid = !isSignInMode && username.length > 0;
+    const isEmailValid = email && emailRegex.test(email);
+    const isPasswordValid = password;
 
     const currentHour = new Date().getHours();
     const isDayTime = currentHour >= 6 && currentHour < 18;
+
+    const animatedUsername = useAnimatedStyle(() => ({
+        transform: [{ translateX: usernameInputOffsetX.value }],
+    }));
 
     const animatedEmail = useAnimatedStyle(() => ({
         transform: [{ translateX: emailInputOffsetX.value }],
@@ -45,8 +55,20 @@ export const AuthScreen: React.FC = () => {
         transform: [{ translateX: passwordInputOffsetX.value }],
     }));
 
-    const shakeInput = (input: 'email' | 'password') => {
-        const desiredInput = input === 'email' ? emailInputOffsetX : passwordInputOffsetX;
+    const shakeInput = (input: 'username' | 'email' | 'password') => {
+        let desiredInput;
+
+        switch (input) {
+            case 'username':
+                desiredInput = usernameInputOffsetX;
+                break;
+            case 'email':
+                desiredInput = emailInputOffsetX;
+                break;
+            case 'password':
+                desiredInput = passwordInputOffsetX;
+                break;
+        }
 
         if (desiredInput.value !== 0) return;
 
@@ -58,27 +80,28 @@ export const AuthScreen: React.FC = () => {
         );
     };
 
-    const onActionClick = (callback: { (): void }) => {
-        const isEmailValid = email && email.includes('@');
-        const isPasswordValid = password;
+    const handleSignIn = async () => {
+        if (!isEmailValid) shakeInput('email');
+        if (!isPasswordValid) shakeInput('password');
 
-        if (!isEmailValid) {
-            shakeInput('email');
-        }
-        if (!isPasswordValid) {
-            shakeInput('password');
-        }
-        if (isEmailValid && isPasswordValid) callback();
+        if (!isEmailValid || !isPasswordValid) return;
+
+        setIsLoading(true);
+        await signIn(email, password);
+        setIsLoading(false);
     };
 
-    const handleSignIn = () => {
-        setIsLoading(true);
-        signIn(email, password).then(() => setIsLoading(false));
-    };
+    const handleSignUp = async () => {
+        if (!isUsernameValid) shakeInput('username');
+        if (!isEmailValid) shakeInput('email');
+        if (!isPasswordValid) shakeInput('password');
 
-    const handleSignUp = () => {
+        if (!isUsernameValid || !isEmailValid || !isPasswordValid) return;
+
         setIsLoading(true);
-        signUp(email, password).then(() => setIsLoading(false));
+        const authResult = await signUp(email, password);
+        if (authResult) await updateProfile(username);
+        setIsLoading(false);
     };
 
     const getTitle = useMemo(() => {
@@ -106,6 +129,24 @@ export const AuthScreen: React.FC = () => {
                         <Text style={styles.title}>{getTitle}</Text>
 
                         <View>
+                            {!isSignInMode && (
+                                <Animated.View style={[styles.inputContainer, animatedUsername]}>
+                                    <Input
+                                        style={styles.input}
+                                        variant={'underlined'}
+                                        placeholder={'Username'}
+                                        placeholderTextColor={'#fff'}
+                                        selectionColor={'#fff'}
+                                        borderColor={'#fff'}
+                                        value={username}
+                                        onChangeText={setUserName}
+                                        InputLeftElement={
+                                            <Icon name={'person'} size={Sizes.lg} color={'#fff'} />
+                                        }
+                                    />
+                                </Animated.View>
+                            )}
+
                             <Animated.View style={[styles.inputContainer, animatedEmail]}>
                                 <Input
                                     style={styles.input}
@@ -118,7 +159,7 @@ export const AuthScreen: React.FC = () => {
                                     onChangeText={setEmail}
                                     keyboardType={'email-address'}
                                     InputLeftElement={
-                                        <Icon name={'person'} size={Sizes.lg} color={'#fff'} />
+                                        <Icon name={'mail'} size={Sizes.lg} color={'#fff'} />
                                     }
                                 />
                             </Animated.View>
@@ -159,7 +200,7 @@ export const AuthScreen: React.FC = () => {
 
                             <TouchableOpacity
                                 onPress={() => navigate(AUTH_STACK.ForgotPassword)}
-                                hitSlop={DEFAULT_HITSLOP}
+                                hitSlop={HITSLOP}
                             >
                                 <Text style={styles.forgotPassword}>Forgot Password ?</Text>
                             </TouchableOpacity>
@@ -172,11 +213,14 @@ export const AuthScreen: React.FC = () => {
                                             isLoading={isLoading}
                                             isDisabled={isLoading}
                                             variant={'outline'}
-                                            onPress={() => onActionClick(handleSignIn)}
+                                            onPress={handleSignIn}
                                         >
                                             <Text style={styles.buttonText}>Sign in</Text>
                                         </Button>
-                                        <TouchableOpacity onPress={() => setIsSignInMode(false)}>
+                                        <TouchableOpacity
+                                            onPress={() => setIsSignInMode(false)}
+                                            hitSlop={HITSLOP}
+                                        >
                                             <Text style={styles.subText}>
                                                 Don't have account ? <Text>Sign up</Text>
                                             </Text>
@@ -189,14 +233,14 @@ export const AuthScreen: React.FC = () => {
                                             style={styles.button}
                                             isLoading={isLoading}
                                             isDisabled={isLoading}
-                                            onPress={() => onActionClick(handleSignUp)}
+                                            onPress={handleSignUp}
                                         >
                                             <Text style={styles.buttonText}>Sign up</Text>
                                         </Button>
 
                                         <TouchableOpacity
                                             onPress={() => setIsSignInMode(true)}
-                                            hitSlop={DEFAULT_HITSLOP}
+                                            hitSlop={HITSLOP}
                                         >
                                             <Text style={styles.subText}>
                                                 Already have account ? <Text>Sign in</Text>
@@ -223,7 +267,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: Sizes.xxl,
-        color: '#fff',
+        color: Colors.white,
         alignSelf: 'center',
         fontFamily: Fonts.SatisfyRegular,
     },
@@ -231,12 +275,12 @@ const styles = StyleSheet.create({
         marginBottom: Sizes.lg,
     },
     input: {
-        color: '#fff',
+        color: Colors.white,
         marginLeft: Sizes.xxs,
         fontSize: Sizes.md,
     },
     forgotPassword: {
-        color: '#fff',
+        color: Colors.white,
         fontSize: Sizes.sm,
         alignSelf: 'flex-end',
     },
@@ -248,19 +292,19 @@ const styles = StyleSheet.create({
     },
     button: {
         width: '100%',
-        height: 42,
+        height: 40,
         borderRadius: Sizes.xxs,
         alignItems: 'center',
         justifyContent: 'center',
-        borderColor: '#fff',
+        borderColor: Colors.white,
         marginBottom: Sizes.lg,
     },
     buttonText: {
-        color: '#fff',
+        color: Colors.white,
         fontSize: Sizes.md,
     },
     subText: {
-        color: '#fff',
+        color: Colors.white,
         fontSize: Sizes.sm,
     },
 });

@@ -26,6 +26,7 @@ export const sessionSlice = createSlice({
     initialState,
     reducers: {
         setUserDetails: (store, action: PayloadAction<UserData>) => {
+            console.log(action.payload);
             const { displayName, email, emailVerified, phoneNumber, photoURL } = action.payload;
             store.isAuthenticated = true;
             store.userName = displayName;
@@ -33,6 +34,9 @@ export const sessionSlice = createSlice({
             store.emailVerified = emailVerified;
             store.phoneNumber = phoneNumber;
             store.photoURL = photoURL;
+        },
+        setUserName: (store, action: PayloadAction<string>) => {
+            store.userName = action.payload;
         },
         resetUserDetails: store => (store = initialState),
         setUserPhoto: (store, action: PayloadAction<ImageURISource>) => {

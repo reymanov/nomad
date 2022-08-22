@@ -8,7 +8,7 @@ const AuthHandler: React.FC = () => {
     const [initializing, setInitializing] = useState(true);
     const dispatch = useDispatch();
 
-    const onAuthStateChanged = (user: any) => {
+    const onUserStateChanged = (user: any) => {
         if (user) dispatch(sessionActions.setUserDetails(user));
         else dispatch(sessionActions.resetUserDetails());
 
@@ -16,8 +16,14 @@ const AuthHandler: React.FC = () => {
     };
 
     useEffect(() => {
-        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-        return subscriber;
+        const subscriptions = [
+            auth().onAuthStateChanged(onUserStateChanged),
+            auth().onUserChanged(onUserStateChanged),
+        ];
+
+        return () => {
+            subscriptions.forEach(subscription => subscription());
+        };
     }, []);
 
     return null;

@@ -1,5 +1,5 @@
-export { Colors } from './colors';
-export { Fonts } from './fonts';
-export { Sizes } from './sizes';
-export * from './customMapStyles';
-export { DEFAULT_HITSLOP } from './hitslop';
+export * from './colors';
+export * from './fonts';
+export * from './sizes';
+export * from './mapStyles';
+export * from './regex';

@@ -13,7 +13,9 @@ const HomeScreen: React.FC = () => {
 
     return (
         <SafeAreaView style={[styles.container, { backgroundColor }]}>
-            <ThemedText>Home</ThemedText>
+            <ThemedText fontSize={36} fontWeight={'medium'}>
+                Home
+            </ThemedText>
         </SafeAreaView>
     );
 };

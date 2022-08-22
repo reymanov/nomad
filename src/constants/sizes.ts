@@ -9,3 +9,4 @@ export enum Sizes {
     xxl = 48,
     xxxl = 64,
 }
+export const HITSLOP = { left: 10, top: 10, right: 10, bottom: 10 };

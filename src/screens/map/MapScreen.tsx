@@ -20,29 +20,23 @@ const MapScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        position: 'absolute',
+        top: -24,
+        left: 0,
+        right: 0,
+        bottom: 0,
     },
     curve: {
         width: '100%',
-        height: 10,
+        height: 8,
         position: 'absolute',
         bottom: 0,
-        borderTopRightRadius: 15,
-        borderTopLeftRadius: 15,
-    },
-    mapLayers: {
-        position: 'absolute',
-        top: 72,
-        right: 16,
-        width: 40,
-        height: 40,
-        borderRadius: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
+        borderTopRightRadius: 8,
+        borderTopLeftRadius: 8,
         shadowColor: '#222',
-        shadowOffset: { width: 0, height: 0 },
-        shadowRadius: 3,
-        shadowOpacity: 0.5,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 4,
+        shadowOpacity: 0.4,
     },
 });
 

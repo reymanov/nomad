@@ -7,8 +7,6 @@ interface Props {
     children?: React.ReactNode;
 }
 
-const ScreenContainer: React.FC<Props> = ({ style, children }) => {
+export const ScreenContainer: React.FC<Props> = ({ style, children }) => {
     return <SafeAreaView style={[{ flex: 1 }, style]}>{children}</SafeAreaView>;
 };
-
-export default ScreenContainer;

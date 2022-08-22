@@ -5,7 +5,7 @@ import { AppState } from '@store/index';
 export enum MapType {
     STANDARD = 'STANDARD',
     DARK = 'DARK',
-    SATELLITE = 'SATELLITE',
+    RETRO = 'RETRO',
     HYBRID = 'HYBRID',
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useColorMode, useTheme } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { mapActions } from '@store/map/mapSlice';
 
 interface IMapControls {
@@ -22,13 +22,13 @@ export const MapControls: React.FC<IMapControls> = ({
 
     const isDarkMode = colorMode === 'dark';
     const backgroundColor = isDarkMode ? colors.dark[50] : colors.dark[800];
-    const iconColor = isDarkMode ? colors.dark[800] : colors.dark[50];
+    const iconColor = isDarkMode ? colors.dark[800] : colors.dark[100];
     const handleMapLayersClick = () => {
         dispatch(mapActions.openMapLayersDrawer());
     };
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <TouchableOpacity
                 style={[styles.control, { backgroundColor }]}
                 onPress={handleMapLayersClick}
@@ -51,26 +51,25 @@ export const MapControls: React.FC<IMapControls> = ({
                     <Icon name={'compass'} size={24} color={iconColor} />
                 </TouchableOpacity>
             )}
-        </View>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        top: 60,
-        right: 16,
+        top: 80,
+        right: 12,
     },
     control: {
-        width: 40,
-        height: 40,
+        padding: 10,
         borderRadius: 6,
         justifyContent: 'center',
         alignItems: 'center',
         shadowColor: '#222',
         shadowOffset: { width: 0, height: 0 },
         shadowRadius: 3,
-        shadowOpacity: 0.5,
+        shadowOpacity: 0.4,
         marginBottom: 8,
     },
 });

@@ -7,8 +7,7 @@ import { store } from '@store/index';
 import AuthHandler from '@handlers/AuthHandler';
 import { RootNavigator } from '@navigation/navigators';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-// import NetworkHandler from '@handlers/NetworkHandler';
-// import {colorModeManager} from '@utils/ColorModeManager';
+import { colorModeManager } from '@utils/ColorCodeManager';
 
 const config = { useSystemColorMode: true };
 const customTheme = extendTheme({ config });
@@ -16,11 +15,10 @@ const customTheme = extendTheme({ config });
 const App: React.FC = () => {
     return (
         <Provider store={store}>
-            <NativeBaseProvider theme={customTheme}>
+            <NativeBaseProvider theme={customTheme} colorModeManager={colorModeManager}>
                 <BottomSheetModalProvider>
                     <RootNavigator />
                     <AuthHandler />
-                    {/* <NetworkHandler /> */}
                 </BottomSheetModalProvider>
             </NativeBaseProvider>
         </Provider>

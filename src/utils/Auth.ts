@@ -23,7 +23,7 @@ export const signIn = async (email: string, password: string) => {
                 Alert.alert('Error', 'Too many attempts, try again later');
                 break;
             default:
-                Alert.alert('Error');
+                Alert.alert('Error', error.message);
                 break;
         }
         return false;
@@ -49,9 +49,25 @@ export const signUp = async (email: string, password: string) => {
                 Alert.alert('Error', 'This email has been disabled');
                 break;
             default:
-                Alert.alert('Error');
+                Alert.alert('Error', error.message);
                 break;
         }
+        return false;
+    }
+};
+
+export const updateProfile = async (username?: string) => {
+    try {
+        const currentUser = auth().currentUser;
+        if (currentUser) {
+            await currentUser.updateProfile({ displayName: username });
+        } else {
+            return false;
+        }
+
+        return true;
+    } catch (error: any) {
+        Alert.alert('Error', error.message);
         return false;
     }
 };

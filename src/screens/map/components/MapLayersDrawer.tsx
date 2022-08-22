@@ -8,6 +8,7 @@ import { MapLayersItem } from './MapLayersItem';
 import { mapActions, MapType } from '@store/map/mapSlice';
 import { ThemedText } from '@components/texts';
 import { useSelectMapLayersDrawerState, useSelectMapStyle } from '@store/map/useMapSelectors';
+import { writeMapType } from '@utils/Storage';
 
 export const MapLayersDrawer: React.FC = () => {
     const dispatch = useDispatch();
@@ -19,14 +20,15 @@ export const MapLayersDrawer: React.FC = () => {
     const mapStyle = useSelectMapStyle();
     const bottomSheetRef = useRef<BottomSheet>(null);
 
-    const snapPoints = [320];
+    const snapPoints = [340];
 
     const handleClose = () => {
         dispatch(mapActions.closeMapLayersDrawer());
     };
 
     const selectMapType = useCallback(
-        (mapType: MapType) => {
+        async (mapType: MapType) => {
+            await writeMapType(mapType);
             dispatch(mapActions.setMapStyle(mapType));
         },
         [dispatch]
@@ -68,22 +70,22 @@ export const MapLayersDrawer: React.FC = () => {
                             onPress={() => selectMapType(MapType.STANDARD)}
                         />
                         <MapLayersItem
+                            title="Hybrid"
+                            image={require('@assets/images/hybrid.png')}
+                            isActive={mapStyle === MapType.HYBRID}
+                            onPress={() => selectMapType(MapType.HYBRID)}
+                        />
+                        <MapLayersItem
                             title="Dark"
                             image={require('@assets/images/dark.png')}
                             isActive={mapStyle === MapType.DARK}
                             onPress={() => selectMapType(MapType.DARK)}
                         />
                         <MapLayersItem
-                            title="Satelite"
-                            image={require('@assets/images/satellite.png')}
-                            isActive={mapStyle === MapType.SATELLITE}
-                            onPress={() => selectMapType(MapType.SATELLITE)}
-                        />
-                        <MapLayersItem
-                            title="Hybrid"
-                            image={require('@assets/images/hybrid.png')}
-                            isActive={mapStyle === MapType.HYBRID}
-                            onPress={() => selectMapType(MapType.HYBRID)}
+                            title="Retro"
+                            image={require('@assets/images/retro.png')}
+                            isActive={mapStyle === MapType.RETRO}
+                            onPress={() => selectMapType(MapType.RETRO)}
                         />
                     </View>
                 </View>
@@ -101,6 +103,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     items: {
+        width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
