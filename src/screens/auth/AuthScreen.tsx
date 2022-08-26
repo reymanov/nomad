@@ -22,6 +22,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { signIn, signUp, updateProfile } from '@utils/Auth';
 import { AUTH_STACK } from '@navigation/types';
 import { Fonts, HITSLOP, Sizes, emailRegex, Colors } from '@constants/index';
+import { logEvent } from '@src/utils/Analytics';
 
 export const AuthScreen: React.FC = () => {
     const [isSignInMode, setIsSignInMode] = useState(true);
@@ -88,6 +89,7 @@ export const AuthScreen: React.FC = () => {
 
         setIsLoading(true);
         await signIn(email, password);
+        logEvent('sign_in');
         setIsLoading(false);
     };
 
@@ -100,6 +102,7 @@ export const AuthScreen: React.FC = () => {
 
         setIsLoading(true);
         const authResult = await signUp(email, password);
+        logEvent('sign_up');
         if (authResult) await updateProfile(username);
         setIsLoading(false);
     };

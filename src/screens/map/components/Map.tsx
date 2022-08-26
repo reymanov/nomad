@@ -10,6 +10,7 @@ import { useSelectMapStyle } from '@store/map/useMapSelectors';
 import { dark, GenericStyles, retro } from '@constants/index';
 import { readMapType } from '@utils/Storage';
 import { MapControls } from './MapControls';
+import { logEvent } from '@utils/Analytics';
 
 export const Map = () => {
     const [region, setRegion] = useState<Region>();
@@ -37,6 +38,7 @@ export const Map = () => {
                 mapRef.current.animateToRegion(region, 200);
             }
         });
+        logEvent('focus_user_location');
     };
 
     useEffect(() => {
@@ -66,6 +68,12 @@ export const Map = () => {
 
     const rotateNorth = () => {
         mapRef.current?.animateCamera({ heading: 0 });
+        logEvent('map_rotate_north');
+    };
+
+    const openMapLayersDrawer = () => {
+        dispatch(mapActions.openMapLayersDrawer());
+        logEvent('open_map_layers_drawer');
     };
 
     const mapType =
@@ -92,6 +100,7 @@ export const Map = () => {
             />
             <MapControls
                 cameraHeading={cameraHeading}
+                onMapLayersPress={openMapLayersDrawer}
                 onLocationPress={focusUserLocation}
                 onCompassPress={rotateNorth}
             />

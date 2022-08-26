@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { Button, Switch, Text, useColorMode } from 'native-base';
@@ -10,15 +9,16 @@ import { Sizes } from '@constants/index';
 import { ThemedText } from '@components/texts';
 import { ThemedScreenContainer } from '@containers/index';
 import { useSelectUserDetails } from '@store/session/useSessionSelectors';
+import { logEvent } from '@src/utils/Analytics';
 
 const SettingsScreen = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const userDetails = useSelectUserDetails();
-    const dispatch = useDispatch();
 
     const handleSignOut = async () => {
         try {
             await auth().signOut();
+            logEvent('sign_out');
         } catch (e) {
             console.error(e);
         }

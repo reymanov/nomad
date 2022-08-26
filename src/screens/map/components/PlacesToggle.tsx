@@ -1,11 +1,12 @@
 import { useColorMode, useTheme } from 'native-base';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Dimensions, Pressable, StyleSheet, Text, View, ViewProps } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { GenericStyles, Colors, Sizes } from '@constants/index';
-import { useSelectPlacesToggle } from '@src/store/map/useMapSelectors';
-import { mapActions, PToggle } from '@src/store/map/mapSlice';
+import { useSelectPlacesToggle } from '@store/map/useMapSelectors';
+import { mapActions, PToggle } from '@store/map/mapSlice';
 import { useDispatch } from 'react-redux';
+import { logEvent } from '@utils/Analytics';
 
 export const PlacesToggle: React.FC<ViewProps> = ({ ...props }) => {
     const activeItem = useSelectPlacesToggle();
@@ -42,6 +43,7 @@ export const PlacesToggle: React.FC<ViewProps> = ({ ...props }) => {
 
     const onToggle = (item: PToggle) => {
         dispatch(mapActions.setPlacesToggle(item));
+        logEvent('select_place_toggle', { type: item });
     };
 
     return (

@@ -1,25 +1,24 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useColorMode, useTheme } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
-import { mapActions } from '@store/map/mapSlice';
 import { GenericStyles } from '@constants/index';
 
 interface IMapControls {
     cameraHeading: number;
+    onMapLayersPress: () => void;
     onLocationPress: () => void;
     onCompassPress: () => void;
 }
 
 export const MapControls: React.FC<IMapControls> = ({
     cameraHeading,
+    onMapLayersPress,
     onLocationPress,
     onCompassPress,
 }) => {
     const { colorMode } = useColorMode();
     const { colors } = useTheme();
-    const dispatch = useDispatch();
 
     const isMapRotated = cameraHeading !== 0;
     const isDarkMode = colorMode === 'dark';
@@ -30,7 +29,7 @@ export const MapControls: React.FC<IMapControls> = ({
         <SafeAreaView style={styles.container}>
             <TouchableOpacity
                 style={[styles.control, { backgroundColor }]}
-                onPress={() => dispatch(mapActions.openMapLayersDrawer())}
+                onPress={onMapLayersPress}
             >
                 <Icon name={'earth'} size={22} color={iconColor} />
             </TouchableOpacity>

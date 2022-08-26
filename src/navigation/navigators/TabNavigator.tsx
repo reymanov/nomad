@@ -4,6 +4,7 @@ import SettingsScreen from '@screens/settings/SettingsScreen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useColorMode, useTheme } from 'native-base';
 import { HomeStack, MapStack } from '../stacks';
+import { SettingsStack } from '../stacks/SettingsStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -42,7 +43,7 @@ export const TabNavigator: React.FC = () => {
             <Tab.Screen name="MapTab" component={MapStack} options={{ title: 'Map' }} />
             <Tab.Screen
                 name="SettingsTab"
-                component={SettingsScreen}
+                component={SettingsStack}
                 options={{ title: 'Settings' }}
             />
         </Tab.Navigator>
