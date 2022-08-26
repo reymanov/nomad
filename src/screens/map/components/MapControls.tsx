@@ -4,6 +4,7 @@ import { useColorMode, useTheme } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
 import { mapActions } from '@store/map/mapSlice';
+import { GenericStyles } from '@constants/index';
 
 interface IMapControls {
     cameraHeading: number;
@@ -67,12 +68,8 @@ const styles = StyleSheet.create({
     control: {
         padding: 10,
         borderRadius: 6,
-        justifyContent: 'center',
-        alignItems: 'center',
-        shadowColor: '#222',
-        shadowOffset: { width: 0, height: 0 },
-        shadowRadius: 3,
-        shadowOpacity: 0.4,
         marginBottom: 8,
+        ...GenericStyles.center,
+        ...GenericStyles.shadow,
     },
 });

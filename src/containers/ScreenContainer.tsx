@@ -1,5 +1,6 @@
+import { Sizes } from '@src/constants';
 import React from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Props {
@@ -8,5 +9,13 @@ interface Props {
 }
 
 export const ScreenContainer: React.FC<Props> = ({ style, children }) => {
-    return <SafeAreaView style={[{ flex: 1 }, style]}>{children}</SafeAreaView>;
+    return <SafeAreaView style={[styles.container, style]}>{children}</SafeAreaView>;
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: Sizes.lg,
+        paddingHorizontal: Sizes.md,
+    },
+});

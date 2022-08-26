@@ -9,16 +9,23 @@ export enum MapType {
     HYBRID = 'HYBRID',
 }
 
+export enum PToggle {
+    VISITED = 'VISITED',
+    TO_VISIT = 'TO_VISIT',
+}
+
 interface MapState {
     camera: Camera | null;
-    isMapLayersDrawerOpen: boolean;
     mapStyle: MapType;
+    isMapLayersDrawerOpen: boolean;
+    PlacesToggle: PToggle;
 }
 
 const initialState: MapState = {
     camera: null,
-    isMapLayersDrawerOpen: false,
     mapStyle: MapType.STANDARD,
+    isMapLayersDrawerOpen: false,
+    PlacesToggle: PToggle.VISITED,
 };
 
 export const mapSlice = createSlice({
@@ -36,6 +43,9 @@ export const mapSlice = createSlice({
         },
         setMapStyle: (state, action: PayloadAction<MapType>) => {
             state.mapStyle = action.payload;
+        },
+        setPlacesToggle: (state, action: PayloadAction<PToggle>) => {
+            state.PlacesToggle = action.payload;
         },
     },
 });
@@ -58,10 +68,15 @@ const selectCamera = createSelector([getMapState], state => {
     return state.camera;
 });
 
+const selectPlacesToggle = createSelector([getMapState], state => {
+    return state.PlacesToggle;
+});
+
 export const mapSelectors = {
     selectMapLayersState,
     selectMapStyle,
     selectCamera,
+    selectPlacesToggle,
 };
 
 export default mapSlice.reducer;

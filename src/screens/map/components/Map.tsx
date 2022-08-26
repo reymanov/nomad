@@ -7,7 +7,7 @@ import { throttle } from 'lodash';
 
 import { mapActions, MapType } from '@store/map/mapSlice';
 import { useSelectMapStyle } from '@store/map/useMapSelectors';
-import { dark, retro } from '@constants/index';
+import { dark, GenericStyles, retro } from '@constants/index';
 import { readMapType } from '@utils/Storage';
 import { MapControls } from './MapControls';
 
@@ -101,10 +101,7 @@ export const Map = () => {
 
 const styles = StyleSheet.create({
     map: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
+        ...GenericStyles.absoluteFill,
         bottom: -25,
         zIndex: 0,
     },
