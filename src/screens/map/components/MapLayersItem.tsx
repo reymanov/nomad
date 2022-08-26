@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground, ImageSourcePropType, Dimensions } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { ThemedText } from '@components/texts';
 import { useColorMode, useTheme } from 'native-base';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, StyleSheet, ImageBackground, ImageSourcePropType, Dimensions } from 'react-native';
+
+import { ThemedText } from '@components/texts';
+import { GenericStyles } from '@constants/index';
 
 interface Props {
     title: string;
@@ -15,7 +17,7 @@ export const MapLayersItem: React.FC<Props> = ({ title, image, isActive, onPress
     const { colorMode } = useColorMode();
     const { colors } = useTheme();
     const isDarkMode = colorMode === 'dark';
-    const labelColor = isDarkMode ? colors.dark['200'] : colors.dark['700'];
+    const labelColor = isDarkMode ? colors.dark['200'] : colors.dark['800'];
 
     const itemWidth = Dimensions.get('window').width / 2 - 26;
     return (
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
         borderRadius: 9,
         backgroundColor: 'lightgrey',
         marginBottom: 16,
+        ...GenericStyles.shadow,
     },
     image: {
         flex: 1,
@@ -58,6 +61,7 @@ const styles = StyleSheet.create({
         paddingVertical: 4,
         paddingHorizontal: 12,
         position: 'absolute',
+
         bottom: 0,
         borderBottomLeftRadius: 6,
         borderBottomRightRadius: 6,

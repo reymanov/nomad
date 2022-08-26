@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import MapView, { MAP_TYPES, PROVIDER_GOOGLE, Region } from 'react-native-maps';
+import MapView, { MAP_TYPES, Marker, PROVIDER_GOOGLE, Region } from 'react-native-maps';
 import { useDispatch } from 'react-redux';
 import { throttle } from 'lodash';
 
@@ -11,12 +11,19 @@ import { dark, GenericStyles, retro } from '@constants/index';
 import { readMapType } from '@utils/Storage';
 import { MapControls } from './MapControls';
 import { logEvent } from '@utils/Analytics';
+import { Destination, DESTINATIONS } from '@constants/data';
+import { useSelectActiveVisitType } from '@store/destinations';
+import { useTheme } from 'native-base';
 
 export const Map = () => {
     const [region, setRegion] = useState<Region>();
     const [cameraHeading, setCameraHeading] = useState(0);
+    const visitType = useSelectActiveVisitType();
     const mapStyle = useSelectMapStyle();
+    const { colors } = useTheme();
     const dispatch = useDispatch();
+
+    const showVisited = visitType === 'VISITED';
 
     const mapRef = useRef<MapView>(null);
     const initialRegion = {
@@ -35,10 +42,23 @@ export const Map = () => {
                 longitude: longitude,
             };
             if (mapRef.current) {
-                mapRef.current.animateToRegion(region, 200);
+                mapRef.current.animateToRegion(region, 600);
             }
         });
         logEvent('focus_user_location');
+    };
+
+    const focusDestination = (destination: Destination) => {
+        const { latitude, longitude } = destination.position;
+        const region = {
+            latitude: latitude,
+            longitude: longitude,
+            latitudeDelta: 0.4,
+            longitudeDelta: 0.4,
+        };
+        if (mapRef.current) {
+            mapRef.current.animateToRegion(region, 1000);
+        }
     };
 
     useEffect(() => {
@@ -97,7 +117,23 @@ export const Map = () => {
                 minZoomLevel={3}
                 customMapStyle={customMapStyle}
                 onRegionChange={throttledRegionChange}
-            />
+            >
+                {DESTINATIONS.map(i => {
+                    if ((showVisited && !i.visited) || (!showVisited && i.visited)) return null;
+                    return (
+                        <Marker
+                            key={i.id}
+                            coordinate={{
+                                latitude: i.position.latitude,
+                                longitude: i.position.longitude,
+                            }}
+                            title={i.name}
+                            pinColor={colors.primary['700']}
+                            onPress={() => focusDestination(i)}
+                        />
+                    );
+                })}
+            </MapView>
             <MapControls
                 cameraHeading={cameraHeading}
                 onMapLayersPress={openMapLayersDrawer}

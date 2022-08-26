@@ -13,7 +13,3 @@ export const useSelectMapStyle = () => {
 export const useSelectCamera = () => {
     return useSelector((state: AppState) => mapSelectors.selectCamera(state));
 };
-
-export const useSelectPlacesToggle = () => {
-    return useSelector((state: AppState) => mapSelectors.selectPlacesToggle(state));
-};

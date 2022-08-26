@@ -1,7 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import session from '@store/session/sessionSlice';
-import map from '@store/map/mapSlice';
 import thunk from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
+
+import map from '@store/map';
+import session from '@store/session';
+import destinations from '@store/destinations';
 
 const middlewares = [thunk];
 
@@ -14,6 +16,7 @@ export const store = configureStore({
     reducer: {
         session,
         map,
+        destinations,
     },
     middleware: middlewares,
 });

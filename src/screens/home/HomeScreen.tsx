@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useColorMode, useTheme } from 'native-base';
 import { ThemedText } from '@components/texts';
-import { PlacesToggle } from '../map/components';
 import { ScreenContainer } from '@containers/index';
 import { Sizes } from '@constants/index';
+import { DestinationsList } from './components/DestinationsList';
+import { DestinationsToggle } from '@components/DestinationsToggle';
 
 const HomeScreen: React.FC = () => {
     const { colorMode } = useColorMode();
@@ -15,16 +16,23 @@ const HomeScreen: React.FC = () => {
 
     return (
         <ScreenContainer style={{ backgroundColor }}>
-            <ThemedText fontSize={36} fontWeight={'medium'}>
-                Home
-            </ThemedText>
+            <View style={styles.header}>
+                <ThemedText fontSize={36} fontWeight={'medium'}>
+                    Home
+                </ThemedText>
 
-            <PlacesToggle style={styles.toggle} />
+                <DestinationsToggle style={styles.toggle} />
+            </View>
+            <DestinationsList />
         </ScreenContainer>
     );
 };
 
 const styles = StyleSheet.create({
+    header: {
+        marginTop: Sizes.lg,
+        paddingHorizontal: Sizes.md,
+    },
     toggle: {
         marginTop: Sizes.md,
     },

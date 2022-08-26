@@ -19,10 +19,10 @@ import Animated, {
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import { logEvent } from '@utils/Analytics';
 import { signIn, signUp, updateProfile } from '@utils/Auth';
 import { AUTH_STACK } from '@navigation/types';
 import { Fonts, HITSLOP, Sizes, emailRegex, Colors } from '@constants/index';
-import { logEvent } from '@src/utils/Analytics';
 
 export const AuthScreen: React.FC = () => {
     const [isSignInMode, setIsSignInMode] = useState(true);
@@ -105,6 +105,11 @@ export const AuthScreen: React.FC = () => {
         logEvent('sign_up');
         if (authResult) await updateProfile(username);
         setIsLoading(false);
+    };
+
+    const handleForgotPassword = () => {
+        logEvent('forgot_password');
+        navigate(AUTH_STACK.ForgotPassword);
     };
 
     const getTitle = useMemo(() => {
@@ -201,10 +206,7 @@ export const AuthScreen: React.FC = () => {
                                 />
                             </Animated.View>
 
-                            <TouchableOpacity
-                                onPress={() => navigate(AUTH_STACK.ForgotPassword)}
-                                hitSlop={HITSLOP}
-                            >
+                            <TouchableOpacity onPress={handleForgotPassword} hitSlop={HITSLOP}>
                                 <Text style={styles.forgotPassword}>Forgot Password ?</Text>
                             </TouchableOpacity>
 

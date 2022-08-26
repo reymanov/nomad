@@ -1,29 +1,22 @@
-import { useColorMode, useTheme } from 'native-base';
 import React, { useEffect, useRef } from 'react';
 import { Dimensions, Pressable, StyleSheet, Text, View, ViewProps } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import { GenericStyles, Colors, Sizes } from '@constants/index';
-import { useSelectPlacesToggle } from '@store/map/useMapSelectors';
-import { mapActions, PToggle } from '@store/map/mapSlice';
+import { useTheme } from 'native-base';
 import { useDispatch } from 'react-redux';
-import { logEvent } from '@utils/Analytics';
 
-export const PlacesToggle: React.FC<ViewProps> = ({ ...props }) => {
-    const activeItem = useSelectPlacesToggle();
+import { logEvent } from '@utils/Analytics';
+import { GenericStyles, Colors, Sizes } from '@constants/index';
+import { destinationsActions, useSelectActiveVisitType, VisitType } from '@store/destinations';
+
+export const DestinationsToggle: React.FC<ViewProps> = ({ ...props }) => {
+    const activeItem = useSelectActiveVisitType();
     const containerSizeRef = useRef(0);
     const offsetX = useSharedValue(0);
-
-    const { colorMode } = useColorMode();
     const { colors } = useTheme();
     const dispatch = useDispatch();
-    const isDarkMode = colorMode === 'dark';
-
-    const backgroundColor = isDarkMode ? colors.dark[50] : colors.dark[800];
-    const activeTextColor = Colors.white;
-    const inactiveTextColor = isDarkMode ? Colors.white : Colors.black;
 
     const itemWidth = containerSizeRef.current / 2 || (Dimensions.get('window').width - 32) / 2;
-    const activeIndex = activeItem === PToggle.VISITED ? 0 : 1;
+    const activeIndex = activeItem === 'VISITED' ? 0 : 1;
 
     useEffect(() => {
         offsetX.value = activeIndex;
@@ -41,37 +34,25 @@ export const PlacesToggle: React.FC<ViewProps> = ({ ...props }) => {
         };
     });
 
-    const onToggle = (item: PToggle) => {
-        dispatch(mapActions.setPlacesToggle(item));
+    const onToggle = (item: VisitType) => {
+        dispatch(destinationsActions.setDestinationsType(item));
         logEvent('select_place_toggle', { type: item });
     };
 
     return (
         <View
             {...props}
-            style={[styles.container, { backgroundColor }, props.style]}
+            style={[styles.container, props.style]}
             onLayout={e => (containerSizeRef.current = e.nativeEvent.layout.width)}
         >
             <Animated.View style={[styles.toggle, animatedToggleStyle]} />
-            <Pressable style={styles.item} onPress={() => onToggle(PToggle.VISITED)}>
-                <Text
-                    style={[
-                        activeIndex === 0
-                            ? { color: activeTextColor }
-                            : { color: inactiveTextColor },
-                    ]}
-                >
+            <Pressable style={styles.item} onPress={() => onToggle('VISITED')}>
+                <Text style={{ color: activeIndex === 0 ? Colors.white : Colors.black }}>
                     Visited
                 </Text>
             </Pressable>
-            <Pressable style={styles.item} onPress={() => onToggle(PToggle.TO_VISIT)}>
-                <Text
-                    style={[
-                        activeIndex === 1
-                            ? { color: activeTextColor }
-                            : { color: inactiveTextColor },
-                    ]}
-                >
+            <Pressable style={styles.item} onPress={() => onToggle('TO_VISIT')}>
+                <Text style={{ color: activeIndex === 1 ? Colors.white : Colors.black }}>
                     To visit
                 </Text>
             </Pressable>

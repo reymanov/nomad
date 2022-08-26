@@ -5,11 +5,10 @@ import { useColorMode, useTheme } from 'native-base';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 
 import { MapLayersItem } from './MapLayersItem';
-import { mapActions, MapType } from '@store/map/mapSlice';
 import { ThemedText } from '@components/texts';
-import { useSelectMapLayersDrawerState, useSelectMapStyle } from '@store/map/useMapSelectors';
+import { useSelectMapLayersDrawerState, useSelectMapStyle, mapActions, MapType } from '@store/map';
 import { writeMapType } from '@utils/Storage';
-import { logEvent } from '@src/utils/Analytics';
+import { logEvent } from '@utils/Analytics';
 
 export const MapLayersDrawer: React.FC = () => {
     const dispatch = useDispatch();
