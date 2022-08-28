@@ -5,7 +5,7 @@ import { Button, Switch, Text, useColorMode } from 'native-base';
 
 // import { writeMapType } from '@utils/Storage';
 // import { mapActions, MapType } from '@store/map/mapSlice';
-import { Sizes } from '@constants/index';
+import { Colors, Sizes } from '@constants/index';
 import { ThemedText } from '@components/texts';
 import { ThemedScreenContainer } from '@containers/index';
 import { useSelectUserDetails } from '@store/session/useSessionSelectors';
@@ -72,7 +72,13 @@ const SettingsScreen = () => {
                 </View>
             </View>
 
-            <Button rounded={'lg'} width={'24'} alignSelf={'center'} onPress={handleSignOut}>
+            <Button
+                rounded={'lg'}
+                width={'32'}
+                backgroundColor={Colors.primary}
+                alignSelf={'center'}
+                onPress={handleSignOut}
+            >
                 <Text color={'#fff'}>Sign out</Text>
             </Button>
         </ThemedScreenContainer>

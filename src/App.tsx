@@ -10,6 +10,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { colorModeManager } from '@utils/ColorCodeManager';
 import StatusBar from './components/StatusBar';
 import UserTrackingService from './services/UserTrackingService';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const config = { useSystemColorMode: true };
 const customTheme = extendTheme({ config });
@@ -20,15 +21,17 @@ const App: React.FC = () => {
     }, []);
 
     return (
-        <Provider store={store}>
-            <NativeBaseProvider theme={customTheme} colorModeManager={colorModeManager}>
-                <BottomSheetModalProvider>
-                    <StatusBar />
-                    <RootNavigator />
-                    <AuthHandler />
-                </BottomSheetModalProvider>
-            </NativeBaseProvider>
-        </Provider>
+        <SafeAreaProvider>
+            <Provider store={store}>
+                <NativeBaseProvider theme={customTheme} colorModeManager={colorModeManager}>
+                    <BottomSheetModalProvider>
+                        <StatusBar />
+                        <RootNavigator />
+                        <AuthHandler />
+                    </BottomSheetModalProvider>
+                </NativeBaseProvider>
+            </Provider>
+        </SafeAreaProvider>
     );
 };
 

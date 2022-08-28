@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Dimensions, Pressable, StyleSheet, Text, View, ViewProps } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import { useTheme } from 'native-base';
 import { useDispatch } from 'react-redux';
 
 import { logEvent } from '@utils/Analytics';
@@ -12,7 +11,6 @@ export const PlacesToggle: React.FC<ViewProps> = ({ ...props }) => {
     const activeItem = useSelectActiveVisitType();
     const containerSizeRef = useRef(0);
     const offsetX = useSharedValue(0);
-    const { colors } = useTheme();
     const dispatch = useDispatch();
 
     const itemWidth = containerSizeRef.current / 2 || (Dimensions.get('window').width - 32) / 2;
@@ -25,7 +23,7 @@ export const PlacesToggle: React.FC<ViewProps> = ({ ...props }) => {
     const animatedToggleStyle = useAnimatedStyle(() => {
         return {
             width: itemWidth - 4,
-            backgroundColor: colors.primary[700],
+            backgroundColor: Colors.primary,
             left: withSpring(offsetX.value * itemWidth + 2, {
                 stiffness: 500,
                 overshootClamping: false,
@@ -77,7 +75,6 @@ const styles = StyleSheet.create({
         height: '100%',
         position: 'absolute',
         marginTop: 2,
-        backgroundColor: Colors.blueLagoon,
         borderRadius: 6,
     },
 });

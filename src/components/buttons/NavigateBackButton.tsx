@@ -2,11 +2,11 @@ import React from 'react';
 import { useTheme } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ViewProps } from 'react-native';
 
 import { HITSLOP, Sizes } from '@constants/index';
 
-export const NavigateBackButton: React.FC = () => {
+export const NavigateBackButton: React.FC<ViewProps> = ({ ...props }) => {
     const { colors } = useTheme();
     const navigation = useNavigation();
 
@@ -16,9 +16,9 @@ export const NavigateBackButton: React.FC = () => {
         navigation.goBack();
     };
     return (
-        <View>
+        <View {...props}>
             <TouchableOpacity style={styles.container} hitSlop={HITSLOP} onPress={handlePress}>
-                <Icon name={'chevron-left'} color={color} size={26} />
+                <Icon name={'chevron-left'} color={color} size={30} />
                 <Text style={[styles.text, { color }]}>Back</Text>
             </TouchableOpacity>
         </View>
@@ -31,8 +31,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: Sizes.xxxs,
+        zIndex: 1,
     },
     text: {
-        fontSize: 16,
+        fontSize: 18,
+        fontWeight: '500',
     },
 });

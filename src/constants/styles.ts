@@ -5,7 +5,7 @@ export const GenericStyles = StyleSheet.create({
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 4,
-        shadowOpacity: 0.4,
+        shadowOpacity: 0.6,
     },
     center: {
         alignItems: 'center',

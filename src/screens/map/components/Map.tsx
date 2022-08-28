@@ -7,20 +7,18 @@ import { throttle } from 'lodash';
 
 import { mapActions, MapType } from '@store/map/mapSlice';
 import { useSelectMapStyle } from '@store/map/useMapSelectors';
-import { dark, GenericStyles, retro } from '@constants/index';
+import { Colors, dark, GenericStyles, retro } from '@constants/index';
 import { readMapType } from '@utils/Storage';
 import { MapControls } from './MapControls';
 import { logEvent } from '@utils/Analytics';
-import { Place, Places } from '@constants/data';
-import { useSelectActiveVisitType } from '@store/places';
-import { useTheme } from 'native-base';
+import { TPlace, useSelectActiveVisitType, useSelectPlaces } from '@store/places';
 
 export const Map = () => {
     const [region, setRegion] = useState<Region>();
     const [cameraHeading, setCameraHeading] = useState(0);
     const visitType = useSelectActiveVisitType();
     const mapStyle = useSelectMapStyle();
-    const { colors } = useTheme();
+    const places = useSelectPlaces();
     const dispatch = useDispatch();
 
     const showVisited = visitType === 'VISITED';
@@ -48,7 +46,7 @@ export const Map = () => {
         logEvent('focus_user_location');
     };
 
-    const focusPlace = (Place: Place) => {
+    const focusPlace = (Place: TPlace) => {
         const { latitude, longitude } = Place.position;
         const region = {
             latitude: latitude,
@@ -118,7 +116,7 @@ export const Map = () => {
                 customMapStyle={customMapStyle}
                 onRegionChange={throttledRegionChange}
             >
-                {Places.map(i => {
+                {places.map(i => {
                     if ((showVisited && !i.visited) || (!showVisited && i.visited)) return null;
                     return (
                         <Marker
@@ -128,7 +126,7 @@ export const Map = () => {
                                 longitude: i.position.longitude,
                             }}
                             title={i.name}
-                            pinColor={colors.primary['700']}
+                            pinColor={Colors.primary}
                             onPress={() => focusPlace(i)}
                         />
                     );

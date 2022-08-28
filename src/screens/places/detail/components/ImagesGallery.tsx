@@ -1,0 +1,40 @@
+import { GenericStyles } from '@src/constants';
+import React from 'react';
+import { Dimensions, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+
+interface Props {
+    images: string[];
+    onPress: (index: number) => void;
+}
+
+export const ImagesGallery: React.FC<Props> = ({ images, onPress }) => {
+    return (
+        <View style={styles.container}>
+            {images.map((image, index) => {
+                return (
+                    <TouchableOpacity key={image} onPress={() => onPress(index)}>
+                        <Image source={{ uri: image }} style={[styles.galleryItem]} />
+                    </TouchableOpacity>
+                );
+            })}
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        position: 'absolute',
+        top: Dimensions.get('window').height * 0.25,
+        right: 16,
+        zIndex: 1,
+        alignItems: 'center',
+        ...GenericStyles.shadow,
+    },
+    galleryItem: {
+        height: 64,
+        width: 64,
+        borderRadius: 8,
+        marginBottom: 12,
+        backgroundColor: '#fff',
+    },
+});
