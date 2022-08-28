@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import SettingsScreen from '@screens/settings/SettingsScreen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useColorMode, useTheme } from 'native-base';
 import { HomeStack, MapStack } from '../stacks';

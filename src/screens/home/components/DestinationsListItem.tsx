@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text } from 'native-base';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, Text, Pressable, StyleSheet, View } from 'react-native';
 
-import { GenericStyles } from '@constants/index';
+import { GenericStyles, Sizes } from '@constants/index';
+import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface Props {
     id: number;
@@ -14,39 +15,60 @@ interface Props {
 
 export const DestinationsListItem: React.FC<Props> = ({ id, name, country, image, isFavorite }) => {
     return (
-        <TouchableOpacity style={styles.container}>
-            <Image source={{ uri: image }} resizeMode={'cover'} style={styles.image} />
-
-            <View style={styles.content}>
-                <View style={styles.title}>
-                    <Text fontSize={16} fontWeight={'medium'}>
-                        {name}
-                    </Text>
-                    <Text fontSize={12} color={'gray'}>
-                        {country}
-                    </Text>
-                </View>
-            </View>
-        </TouchableOpacity>
+        <Pressable style={styles.container}>
+            <ImageBackground source={{ uri: image }} resizeMode={'cover'} style={styles.image}>
+                <LinearGradient
+                    colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.75)']}
+                    style={styles.content}
+                >
+                    <View>
+                        <Text style={styles.nameText}>{name}</Text>
+                        <View style={styles.countryContainer}>
+                            <Icon name={'place'} color={'#fff'} size={16} />
+                            <Text style={styles.countryText}>{country}</Text>
+                        </View>
+                    </View>
+                    {isFavorite && <Icon name={'favorite'} color={'#fff'} size={20} />}
+                </LinearGradient>
+            </ImageBackground>
+        </Pressable>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        borderRadius: 6,
-        backgroundColor: '#fff',
-        marginBottom: 16,
-        overflow: 'hidden',
+        height: 160,
+        borderRadius: Sizes.xxs,
+        marginBottom: Sizes.md,
         ...GenericStyles.shadow,
     },
     image: {
-        width: '100%',
-        height: 140,
+        flex: 1,
+        borderRadius: Sizes.xxs,
         overflow: 'hidden',
+        justifyContent: 'flex-end',
     },
     content: {
-        padding: 8,
+        height: '50%',
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'space-between',
+        padding: Sizes.sm,
     },
-    title: {},
+    nameText: {
+        fontSize: Sizes.md,
+        color: '#fff',
+        marginBottom: Sizes.xxxs,
+        fontWeight: '500',
+    },
+    countryContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    countryText: {
+        color: '#fff',
+        marginLeft: Sizes.xxxs,
+    },
 });
