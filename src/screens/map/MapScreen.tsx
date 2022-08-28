@@ -2,7 +2,7 @@ import React from 'react';
 import { useColorMode, useTheme } from 'native-base';
 import { StyleSheet, View } from 'react-native';
 import { Map, MapLayersDrawer } from './components';
-import { DestinationsToggle } from '@components/DestinationsToggle';
+import { PlacesToggle } from '@components/PlacesToggle';
 import { GenericStyles, Sizes } from '@constants/index';
 
 const MapScreen: React.FC = () => {
@@ -15,7 +15,7 @@ const MapScreen: React.FC = () => {
     return (
         <View style={styles.container}>
             <Map />
-            <DestinationsToggle style={styles.toggle} />
+            <PlacesToggle style={styles.toggle} />
             <MapLayersDrawer />
             <View style={[styles.curve, { backgroundColor }]} />
         </View>

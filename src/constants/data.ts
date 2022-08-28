@@ -1,4 +1,4 @@
-export interface Destination {
+export interface Place {
     id: number;
     name: string;
     country: string;
@@ -12,7 +12,7 @@ export interface Destination {
     visited: boolean;
 }
 
-export const DESTINATIONS: Destination[] = [
+export const Places: Place[] = [
     {
         id: 1,
         name: 'Paris',

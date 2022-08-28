@@ -1,27 +1,30 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { DestinationsListItem } from './DestinationsListItem';
+import { PlacesListItem } from './PlacesListItem';
 
 import { Sizes } from '@constants/index';
-import { DESTINATIONS } from '@constants/data';
-import { useSelectActiveVisitType } from '@store/destinations';
+import { Places } from '@constants/data';
+import { useSelectActiveVisitType } from '@store/places';
+import { useNavigation } from '@react-navigation/native';
+import { PLACES_STACK, TPlacesStack } from '@src/navigation/types';
 
-export const DestinationsList: React.FC = () => {
+export const PlacesList: React.FC = () => {
     const visitType = useSelectActiveVisitType();
     const showVisited = visitType === 'VISITED';
+    const { navigate } = useNavigation<any>();
 
     return (
         <ScrollView style={styles.container}>
-            {DESTINATIONS.map(({ id, name, country, images, visited, favourite }) => {
+            {Places.map(({ id, name, country, images, visited, favourite }) => {
                 if ((showVisited && !visited) || (!showVisited && visited)) return null;
                 return (
-                    <DestinationsListItem
+                    <PlacesListItem
                         key={id}
-                        id={id}
                         name={name}
                         country={country}
                         image={images[0]}
                         isFavorite={favourite}
+                        onPress={() => navigate(PLACES_STACK.PlacesDetail, { id })}
                     />
                 );
             })}

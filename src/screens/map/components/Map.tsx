@@ -11,8 +11,8 @@ import { dark, GenericStyles, retro } from '@constants/index';
 import { readMapType } from '@utils/Storage';
 import { MapControls } from './MapControls';
 import { logEvent } from '@utils/Analytics';
-import { Destination, DESTINATIONS } from '@constants/data';
-import { useSelectActiveVisitType } from '@store/destinations';
+import { Place, Places } from '@constants/data';
+import { useSelectActiveVisitType } from '@store/places';
 import { useTheme } from 'native-base';
 
 export const Map = () => {
@@ -48,8 +48,8 @@ export const Map = () => {
         logEvent('focus_user_location');
     };
 
-    const focusDestination = (destination: Destination) => {
-        const { latitude, longitude } = destination.position;
+    const focusPlace = (Place: Place) => {
+        const { latitude, longitude } = Place.position;
         const region = {
             latitude: latitude,
             longitude: longitude,
@@ -118,7 +118,7 @@ export const Map = () => {
                 customMapStyle={customMapStyle}
                 onRegionChange={throttledRegionChange}
             >
-                {DESTINATIONS.map(i => {
+                {Places.map(i => {
                     if ((showVisited && !i.visited) || (!showVisited && i.visited)) return null;
                     return (
                         <Marker
@@ -129,7 +129,7 @@ export const Map = () => {
                             }}
                             title={i.name}
                             pinColor={colors.primary['700']}
-                            onPress={() => focusDestination(i)}
+                            onPress={() => focusPlace(i)}
                         />
                     );
                 })}

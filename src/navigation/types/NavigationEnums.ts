@@ -3,8 +3,9 @@ export enum AUTH_STACK {
     ForgotPassword = 'ForgotPassword',
 }
 
-export enum HOME_STACK {
-    Home = 'Home',
+export enum PLACES_STACK {
+    PlacesList = 'PlacesList',
+    PlacesDetail = 'PlacesDetail',
 }
 
 export enum MAP_STACK {

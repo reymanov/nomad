@@ -6,9 +6,9 @@ import { useDispatch } from 'react-redux';
 
 import { logEvent } from '@utils/Analytics';
 import { GenericStyles, Colors, Sizes } from '@constants/index';
-import { destinationsActions, useSelectActiveVisitType, VisitType } from '@store/destinations';
+import { placesActions, useSelectActiveVisitType, VisitType } from '@store/places';
 
-export const DestinationsToggle: React.FC<ViewProps> = ({ ...props }) => {
+export const PlacesToggle: React.FC<ViewProps> = ({ ...props }) => {
     const activeItem = useSelectActiveVisitType();
     const containerSizeRef = useRef(0);
     const offsetX = useSharedValue(0);
@@ -35,7 +35,7 @@ export const DestinationsToggle: React.FC<ViewProps> = ({ ...props }) => {
     });
 
     const onToggle = (item: VisitType) => {
-        dispatch(destinationsActions.setDestinationsType(item));
+        dispatch(placesActions.setPlacesType(item));
         logEvent('select_place_toggle', { type: item });
     };
 

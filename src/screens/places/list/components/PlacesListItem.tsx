@@ -6,16 +6,16 @@ import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface Props {
-    id: number;
     name: string;
     country: string;
     image: string;
     isFavorite: boolean;
+    onPress: () => void;
 }
 
-export const DestinationsListItem: React.FC<Props> = ({ id, name, country, image, isFavorite }) => {
+export const PlacesListItem: React.FC<Props> = ({ name, country, image, isFavorite, onPress }) => {
     return (
-        <Pressable style={styles.container}>
+        <Pressable style={styles.container} onPress={onPress}>
             <ImageBackground source={{ uri: image }} resizeMode={'cover'} style={styles.image}>
                 <LinearGradient
                     colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.75)']}

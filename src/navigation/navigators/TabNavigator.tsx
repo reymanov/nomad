@@ -1,8 +1,8 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { useColorMode, useTheme } from 'native-base';
-import { HomeStack, MapStack } from '../stacks';
+import { PlacesStack, MapStack } from '../stacks';
 import { SettingsStack } from '../stacks/SettingsStack';
 
 const Tab = createBottomTabNavigator();
@@ -30,7 +30,7 @@ export const TabNavigator: React.FC = () => {
                     let iconSize = 24;
                     let iconColor = focused ? textColor : colors.dark[400];
 
-                    if (route.name === 'HomeTab') iconName = 'home';
+                    if (route.name === 'PlacesTab') iconName = 'earth';
                     if (route.name === 'MapTab') iconName = 'map';
                     if (route.name === 'SettingsTab') iconName = 'settings';
 
@@ -38,7 +38,7 @@ export const TabNavigator: React.FC = () => {
                 },
             })}
         >
-            <Tab.Screen name="HomeTab" component={HomeStack} options={{ title: 'Home' }} />
+            <Tab.Screen name="PlacesTab" component={PlacesStack} options={{ title: 'Places' }} />
             <Tab.Screen name="MapTab" component={MapStack} options={{ title: 'Map' }} />
             <Tab.Screen
                 name="SettingsTab"

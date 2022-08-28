@@ -3,8 +3,9 @@ export type TAuthStack = {
     ForgotPassword: undefined;
 };
 
-export type THomeStack = {
-    Home: undefined;
+export type TPlacesStack = {
+    PlacesList: undefined;
+    PlacesDetail: { id: number };
 };
 
 export type TMapStack = {

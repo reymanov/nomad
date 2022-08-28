@@ -3,36 +3,36 @@ import { AppState } from '@store/index';
 
 export type VisitType = 'VISITED' | 'TO_VISIT';
 
-interface DestinationsState {
+interface PlacesState {
     visitType: VisitType;
 }
 
-const initialState: DestinationsState = {
+const initialState: PlacesState = {
     visitType: 'VISITED',
 };
 
-export const destinationsSlice = createSlice({
-    name: 'destinations',
+export const placesSlice = createSlice({
+    name: 'places',
     initialState,
     reducers: {
-        setDestinationsType: (state, action: PayloadAction<VisitType>) => {
+        setPlacesType: (state, action: PayloadAction<VisitType>) => {
             state.visitType = action.payload;
         },
     },
 });
 
-export const destinationsActions = {
-    ...destinationsSlice.actions,
+export const placesActions = {
+    ...placesSlice.actions,
 };
 
-const getMapState = (state: AppState): DestinationsState => state.destinations;
+const getMapState = (state: AppState): PlacesState => state.places;
 
 const selectActiveVisitType = createSelector([getMapState], state => {
     return state.visitType;
 });
 
-export const destinationsSelectors = {
+export const placesSelectors = {
     selectActiveVisitType,
 };
 
-export default destinationsSlice.reducer;
+export default placesSlice.reducer;

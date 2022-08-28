@@ -1,3 +1,3 @@
 export * from './AuthStack';
-export * from './HomeStack';
+export * from './PlacesStack';
 export * from './MapStack';
