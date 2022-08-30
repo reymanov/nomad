@@ -1,2 +1,2 @@
-export * from './list/PlacesListScreen';
-export * from './detail/PlacesDetailScreen';
+export * from './listScreen/PlacesListScreen';
+export * from './detailScreen/PlacesDetailScreen';

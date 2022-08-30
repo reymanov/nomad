@@ -1,6 +1,8 @@
-import { GenericStyles } from '@src/constants';
 import React from 'react';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 import { Dimensions, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+
+import { GenericStyles } from '@constants/index';
 
 interface Props {
     images: string[];
@@ -12,9 +14,11 @@ export const ImagesGallery: React.FC<Props> = ({ images, onPress }) => {
         <View style={styles.container}>
             {images.map((image, index) => {
                 return (
-                    <TouchableOpacity key={image} onPress={() => onPress(index)}>
-                        <Image source={{ uri: image }} style={[styles.galleryItem]} />
-                    </TouchableOpacity>
+                    <Animated.View entering={FadeInDown.delay(index * 200).duration(500)}>
+                        <TouchableOpacity key={image} onPress={() => onPress(index)}>
+                            <Image source={{ uri: image }} style={[styles.galleryItem]} />
+                        </TouchableOpacity>
+                    </Animated.View>
                 );
             })}
         </View>

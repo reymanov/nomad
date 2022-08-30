@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const GenericStyles = StyleSheet.create({
     shadow: {
-        shadowColor: '#000',
+        shadowColor: '#222',
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 4,
         shadowOpacity: 0.6,

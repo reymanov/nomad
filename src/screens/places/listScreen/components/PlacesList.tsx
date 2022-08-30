@@ -35,7 +35,8 @@ export const PlacesList: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: Sizes.md,
+        marginTop: Sizes.xxs,
+        paddingTop: Sizes.xxs,
         paddingHorizontal: Sizes.md,
     },
 });

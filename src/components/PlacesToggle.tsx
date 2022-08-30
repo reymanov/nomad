@@ -4,6 +4,7 @@ import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-na
 import { useDispatch } from 'react-redux';
 
 import { logEvent } from '@utils/Analytics';
+import { triggerHapticFeedback } from '@utils/Haptic';
 import { GenericStyles, Colors, Sizes } from '@constants/index';
 import { placesActions, useSelectActiveVisitType, VisitType } from '@store/places';
 
@@ -34,6 +35,7 @@ export const PlacesToggle: React.FC<ViewProps> = ({ ...props }) => {
 
     const onToggle = (item: VisitType) => {
         dispatch(placesActions.setPlacesType(item));
+        triggerHapticFeedback('impactLight');
         logEvent('select_place_toggle', { type: item });
     };
 
