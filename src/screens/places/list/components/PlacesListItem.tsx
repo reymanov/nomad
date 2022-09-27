@@ -3,7 +3,7 @@ import { ImageBackground, Text, Pressable, StyleSheet, View } from 'react-native
 
 import { GenericStyles, Sizes } from '@constants/index';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface Props {
     name: string;
@@ -24,11 +24,11 @@ export const PlacesListItem: React.FC<Props> = ({ name, country, image, isFavori
                     <View>
                         <Text style={styles.nameText}>{name}</Text>
                         <View style={styles.countryContainer}>
-                            <Icon name={'place'} color={'#fff'} size={16} />
+                            <Icon name={'location'} color={'#fff'} size={16} />
                             <Text style={styles.countryText}>{country}</Text>
                         </View>
                     </View>
-                    {isFavorite && <Icon name={'favorite'} color={'#fff'} size={20} />}
+                    {isFavorite && <Icon name={'heart'} color={'#fff'} size={20} />}
                 </LinearGradient>
             </ImageBackground>
         </Pressable>

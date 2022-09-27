@@ -6,6 +6,7 @@ export enum AUTH_STACK {
 export enum PLACES_STACK {
     PlacesList = 'PlacesList',
     PlacesDetail = 'PlacesDetail',
+    PlacesEdit = 'PlacesEdit',
 }
 
 export enum MAP_STACK {

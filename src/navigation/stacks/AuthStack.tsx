@@ -12,9 +12,7 @@ export const AuthStack: React.FC = () => {
             <Stack.Screen
                 name={AUTH_STACK.ForgotPassword}
                 component={ForgotPasswordScreen}
-                options={{
-                    presentation: 'modal',
-                }}
+                options={{ presentation: 'modal' }}
             />
         </Stack.Navigator>
     );
