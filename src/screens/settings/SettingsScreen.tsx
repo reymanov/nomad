@@ -9,7 +9,6 @@ import { Colors, Sizes } from '@constants/index';
 import { ThemedText } from '@components/texts';
 import { ThemedScreenContainer } from '@containers/index';
 import { useSelectUserDetails } from '@store/session/useSessionSelectors';
-import { logEvent } from '@src/utils/Analytics';
 
 const SettingsScreen = () => {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -18,7 +17,6 @@ const SettingsScreen = () => {
     const handleSignOut = async () => {
         try {
             await auth().signOut();
-            logEvent('sign_out');
         } catch (e) {
             console.error(e);
         }

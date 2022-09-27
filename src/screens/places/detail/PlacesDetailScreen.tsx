@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Row, useColorMode } from 'native-base';
+import { Button, HStack, Row, useColorMode } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Dimensions, Image, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
+import {
+    Dimensions,
+    Image,
+    StyleSheet,
+    TouchableOpacity,
+    Pressable,
+    View,
+    ScrollView,
+} from 'react-native';
 
 import { ThemedText } from '@components/texts';
 import { GenericStyles } from '@constants/index';
@@ -14,7 +22,6 @@ import { ImagesGallery } from './components/ImagesGallery';
 import { PLACES_STACK, TPlacesStack } from '@navigation/types';
 import { placesActions, useSelectPlaceById } from '@store/places';
 import { triggerHapticFeedback } from '@utils/Haptic';
-import { DetailScreenMap } from './components/DetailScreenMap';
 
 type TRoute = RouteProp<TPlacesStack, PLACES_STACK.PlacesDetail>;
 
@@ -61,21 +68,21 @@ export const PlacesDetailScreen: React.FC = () => {
 
             <ImagesGallery images={images} onPress={setActiveGalleryIndex} />
 
-            <Animated.ScrollView style={styles.content} entering={FadeInDown.duration(500)}>
-                <ThemedText fontSize={24} fontWeight={'medium'}>
-                    {name}
-                </ThemedText>
-                <Row alignItems={'center'} space={1}>
-                    <Icon name={'place'} color={isDarkMode ? '#fff' : '#000'} size={20} />
-                    <ThemedText fontSize={16}>{country}</ThemedText>
-                </Row>
+            <View style={styles.content}>
+                <Animated.View entering={FadeInDown.duration(500)}>
+                    <ThemedText fontSize={24} fontWeight={'medium'}>
+                        {name}
+                    </ThemedText>
+                    <Row alignItems={'center'} space={1}>
+                        <Icon name={'place'} color={isDarkMode ? '#fff' : '#000'} size={20} />
+                        <ThemedText fontSize={16}>{country}</ThemedText>
+                    </Row>
 
-                <ThemedText fontSize={16} marginTop={4}>
-                    {description}
-                </ThemedText>
-
-                {/* <DetailScreenMap location={position} /> */}
-            </Animated.ScrollView>
+                    <ThemedText fontSize={16} marginTop={4}>
+                        {description}
+                    </ThemedText>
+                </Animated.View>
+            </View>
         </ThemedScreenContainer>
     );
 };
@@ -93,10 +100,14 @@ const styles = StyleSheet.create({
     content: {
         height: Dimensions.get('window').height * 0.5,
         padding: 16,
+        paddingBottom: 48,
     },
     favorite: {
         position: 'absolute',
         right: 16,
         padding: 8,
+    },
+    button: {
+        flexDirection: 'row',
     },
 });

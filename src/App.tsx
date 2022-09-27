@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import 'react-native-gesture-handler';
 import { Provider } from 'react-redux';
 import { extendTheme, NativeBaseProvider } from 'native-base';
@@ -9,17 +9,12 @@ import { RootNavigator } from '@navigation/navigators';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { colorModeManager } from '@utils/ColorCodeManager';
 import StatusBar from './components/StatusBar';
-import UserTrackingService from './services/UserTrackingService';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const config = { useSystemColorMode: true };
 const customTheme = extendTheme({ config });
 
 const App: React.FC = () => {
-    useEffect(() => {
-        UserTrackingService.init();
-    }, []);
-
     return (
         <SafeAreaProvider>
             <Provider store={store}>

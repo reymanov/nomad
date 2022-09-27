@@ -19,7 +19,6 @@ import Animated, {
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { logEvent } from '@utils/Analytics';
 import { signIn, signUp, updateProfile } from '@utils/Auth';
 import { AUTH_STACK } from '@navigation/types';
 import { Fonts, HITSLOP, Sizes, emailRegex, Colors } from '@constants/index';
@@ -89,7 +88,7 @@ export const AuthScreen: React.FC = () => {
 
         setIsLoading(true);
         await signIn(email, password);
-        logEvent('sign_in');
+
         setIsLoading(false);
     };
 
@@ -102,13 +101,12 @@ export const AuthScreen: React.FC = () => {
 
         setIsLoading(true);
         const authResult = await signUp(email, password);
-        logEvent('sign_up');
+
         if (authResult) await updateProfile(username);
         setIsLoading(false);
     };
 
     const handleForgotPassword = () => {
-        logEvent('forgot_password');
         navigate(AUTH_STACK.ForgotPassword);
     };
 

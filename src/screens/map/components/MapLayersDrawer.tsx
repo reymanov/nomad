@@ -8,7 +8,6 @@ import { MapLayersItem } from './MapLayersItem';
 import { ThemedText } from '@components/texts';
 import { useSelectMapLayersDrawerState, useSelectMapStyle, mapActions, MapType } from '@store/map';
 import { writeMapType } from '@utils/Storage';
-import { logEvent } from '@utils/Analytics';
 
 export const MapLayersDrawer: React.FC = () => {
     const dispatch = useDispatch();
@@ -30,7 +29,6 @@ export const MapLayersDrawer: React.FC = () => {
         async (mapType: MapType) => {
             await writeMapType(mapType);
             dispatch(mapActions.setMapStyle(mapType));
-            logEvent('select_map', { type: mapType });
         },
         [dispatch]
     );

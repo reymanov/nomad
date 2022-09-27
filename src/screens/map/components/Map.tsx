@@ -10,7 +10,6 @@ import { useSelectMapStyle } from '@store/map/useMapSelectors';
 import { Colors, dark, GenericStyles, retro } from '@constants/index';
 import { readMapType } from '@utils/Storage';
 import { MapControls } from './MapControls';
-import { logEvent } from '@utils/Analytics';
 import { TPlace, useSelectActiveVisitType, useSelectPlaces } from '@store/places';
 
 export const Map = () => {
@@ -43,7 +42,6 @@ export const Map = () => {
                 mapRef.current.animateToRegion(region, 600);
             }
         });
-        logEvent('focus_user_location');
     };
 
     const focusPlace = (Place: TPlace) => {
@@ -86,12 +84,10 @@ export const Map = () => {
 
     const rotateNorth = () => {
         mapRef.current?.animateCamera({ heading: 0 });
-        logEvent('map_rotate_north');
     };
 
     const openMapLayersDrawer = () => {
         dispatch(mapActions.openMapLayersDrawer());
-        logEvent('open_map_layers_drawer');
     };
 
     const mapType =
