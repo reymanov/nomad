@@ -7,8 +7,13 @@ import { triggerHapticFeedback } from '@utils/Haptic';
 import { GenericStyles, Colors, Sizes } from '@constants/index';
 import { placesActions, useSelectActiveVisitType, VisitType } from '@store/places';
 
-export const PlacesToggle: React.FC<ViewProps> = ({ ...props }) => {
-    const activeItem = useSelectActiveVisitType();
+interface Props extends ViewProps {
+    active?: VisitType;
+    onChange?: () => void;
+}
+
+export const PlacesToggle: React.FC<Props> = ({ active, onChange, ...props }) => {
+    const activeItem = active || useSelectActiveVisitType();
     const containerSizeRef = useRef(0);
     const offsetX = useSharedValue(0);
     const dispatch = useDispatch();
@@ -33,7 +38,9 @@ export const PlacesToggle: React.FC<ViewProps> = ({ ...props }) => {
     });
 
     const onToggle = (item: VisitType) => {
-        dispatch(placesActions.setPlacesType(item));
+        if (onChange) onChange();
+        else dispatch(placesActions.setPlacesType(item));
+
         triggerHapticFeedback('impactLight');
     };
 

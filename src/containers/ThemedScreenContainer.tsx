@@ -16,7 +16,8 @@ export const ThemedScreenContainer: React.FC<Props> = ({ useSafeArea = true, sty
     const isDarkMode = colorMode === 'dark';
     const backgroundColor = isDarkMode ? colors.dark[50] : colors.dark[800];
 
-    if (useSafeArea === false) return <View style={[{ backgroundColor }, style]}>{children}</View>;
+    if (useSafeArea === false)
+        return <View style={[{ backgroundColor, flex: 1 }, style]}>{children}</View>;
 
     return <ScreenContainer style={[{ backgroundColor }, style]}>{children}</ScreenContainer>;
 };

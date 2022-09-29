@@ -7,7 +7,7 @@ export const ThemedText: React.FC<ITextProps> = props => {
     const textColor = colorMode === 'dark' ? colors.dark[900] : 'black';
 
     return (
-        <Text color={textColor} {...props}>
+        <Text color={textColor} fontWeight={props.fontWeight || 'medium'} {...props}>
             {props.children}
         </Text>
     );

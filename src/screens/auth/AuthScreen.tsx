@@ -19,9 +19,9 @@ import Animated, {
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { signIn, signUp, updateProfile } from '@utils/Auth';
 import { AUTH_STACK } from '@navigation/types';
-import { Fonts, HITSLOP, Sizes, emailRegex, Colors } from '@constants/index';
+import { signIn, signUp, updateProfile } from '@utils/Auth';
+import { Fonts, HITSLOP, Sizes, emailRegex, Colors } from '@src/constants';
 
 export const AuthScreen: React.FC = () => {
     const [isSignInMode, setIsSignInMode] = useState(true);
@@ -81,14 +81,17 @@ export const AuthScreen: React.FC = () => {
     };
 
     const handleSignIn = async () => {
-        if (!isEmailValid) shakeInput('email');
-        if (!isPasswordValid) shakeInput('password');
-
-        if (!isEmailValid || !isPasswordValid) return;
+        if (!isEmailValid) {
+            shakeInput('email');
+            return;
+        }
+        if (!isPasswordValid) {
+            shakeInput('password');
+            return;
+        }
 
         setIsLoading(true);
         await signIn(email, password);
-
         setIsLoading(false);
     };
 

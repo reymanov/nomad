@@ -6,7 +6,7 @@ export type TAuthStack = {
 export type TPlacesStack = {
     PlacesList: undefined;
     PlacesDetail: { id: number };
-    PlacesEdit: { id?: number };
+    PlacesEdit: { id: number };
 };
 
 export type TMapStack = {

@@ -1,25 +1,21 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
-import { Sizes } from '@constants/index';
+import { Colors, Sizes } from '@constants/index';
 import { Places } from '@constants/data';
 import { ThemedText } from '@components/texts';
 import { ThemedScreenContainer } from '@containers/index';
-import { PlaceButton as NewPlaceButton, PlacesList } from './components';
+import { PlacesList } from './components';
 import { PlacesToggle } from '@components/PlacesToggle';
 import { placesActions } from '@store/places';
-import { useNavigation } from '@react-navigation/native';
 import { PLACES_STACK } from '@navigation/types';
-import { useColorMode } from 'native-base';
+import { IconButton } from '@src/components/buttons';
 
 export const PlacesListScreen: React.FC = () => {
     const dispatch = useDispatch();
-    const { colorMode } = useColorMode();
     const { navigate } = useNavigation<any>();
-
-    const isDarkMode = colorMode === 'dark';
 
     useEffect(() => {
         dispatch(placesActions.setPlaces(Places));
@@ -32,14 +28,11 @@ export const PlacesListScreen: React.FC = () => {
                     <ThemedText fontSize={36} fontWeight={'medium'}>
                         Places
                     </ThemedText>
-                    <NewPlaceButton
-                        icon={
-                            <Icon
-                                name={'add-circle'}
-                                size={32}
-                                color={isDarkMode ? '#fff' : '#000'}
-                            />
-                        }
+
+                    <IconButton
+                        icon={'add-circle-outline'}
+                        size={32}
+                        themed={true}
                         onPress={() => navigate(PLACES_STACK.PlacesEdit)}
                     />
                 </View>
@@ -54,6 +47,7 @@ export const PlacesListScreen: React.FC = () => {
 const styles = StyleSheet.create({
     header: {
         marginTop: Sizes.lg,
+        marginBottom: Sizes.md,
         paddingHorizontal: Sizes.md,
     },
     row: {
