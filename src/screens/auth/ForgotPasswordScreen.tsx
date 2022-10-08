@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Lottie from 'lottie-react-native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Alert, Pressable, StyleSheet, Keyboard, View, Text } from 'react-native';
 import { Button, FormControl, Input, useTheme, WarningOutlineIcon } from 'native-base';
 
-import { Sizes } from '@constants/index';
+import { Sizes } from '@constants/theme';
 import { useKeyboard } from '@hooks/index';
 import { sendPasswordResetEmail } from '@utils/Auth';
-import { useNavigation } from '@react-navigation/native';
 
 export const ForgotPasswordScreen: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);

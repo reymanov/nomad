@@ -2,7 +2,7 @@ import React from 'react';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { Dimensions, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import { GenericStyles } from '@src/constants';
+import { GenericStyles } from '@constants/styles';
 
 interface Props {
     images: string[];

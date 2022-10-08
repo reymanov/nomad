@@ -1,7 +1,8 @@
 import React from 'react';
 import { ImageBackground, Text, Pressable, StyleSheet, View } from 'react-native';
 
-import { GenericStyles, Sizes } from '@constants/index';
+import { Sizes } from '@constants/theme';
+import { GenericStyles } from '@constants/styles';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 

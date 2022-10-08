@@ -2,7 +2,7 @@ import React from 'react';
 import { useColorMode, useTheme } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
-import { GenericStyles } from '@constants/index';
+import { GenericStyles } from '@constants/styles';
 
 interface IMapControls {
     cameraHeading: number;

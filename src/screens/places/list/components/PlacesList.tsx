@@ -1,22 +1,40 @@
-import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { PlacesListItem } from './PlacesListItem';
-
-import { Sizes } from '@constants/index';
-import { useSelectActiveVisitType, useSelectPlaces } from '@store/places';
+import React, { useMemo, useState } from 'react';
+import { FlatList, StyleSheet, RefreshControl } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { PLACES_STACK } from '@navigation/types';
 
+import { Sizes } from '@constants/theme';
+import { PlacesListItem } from './PlacesListItem';
+import { useSelectActiveVisitType, useSelectPlaces } from '@store/places';
+
 export const PlacesList: React.FC = () => {
-    const places = useSelectPlaces();
+    const [isRefreshing, setIsRefreshing] = useState(false);
+
     const visitType = useSelectActiveVisitType();
-    const showVisited = visitType === 'VISITED';
+    const places = useSelectPlaces();
+
     const { navigate } = useNavigation<any>();
+    const showVisited = visitType === 'VISITED';
+
+    const onRefresh = () => {
+        setIsRefreshing(true);
+        setTimeout(() => {
+            setIsRefreshing(false);
+        }, 500);
+    };
+
+    const filteredPlaces = useMemo(
+        () => places.filter(place => place.isVisited === showVisited),
+        [places, showVisited]
+    );
 
     return (
-        <ScrollView style={styles.container}>
-            {places.map(({ id, name, country, images, isVisited, isFavorite }) => {
-                if ((showVisited && !isVisited) || (!showVisited && isVisited)) return null;
+        <FlatList
+            data={filteredPlaces}
+            style={[styles.container, isRefreshing && { opacity: 0.5 }]}
+            renderItem={({ item }) => {
+                const { id, name, country, images, isFavorite } = item;
+                console.log(images);
                 return (
                     <PlacesListItem
                         key={id}
@@ -27,16 +45,16 @@ export const PlacesList: React.FC = () => {
                         onPress={() => navigate(PLACES_STACK.PlacesDetail, { id })}
                     />
                 );
-            })}
-        </ScrollView>
+            }}
+            refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
+        />
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: Sizes.xxs,
-        paddingTop: Sizes.xxs,
+        paddingTop: Sizes.xs,
         paddingHorizontal: Sizes.md,
     },
 });

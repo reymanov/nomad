@@ -1,9 +1,10 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { useColorMode, useTheme } from 'native-base';
-import { PlacesStack, MapStack } from '../stacks';
-import { SettingsStack } from '../stacks/SettingsStack';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { PlacesStack, MapStack } from '@navigation/stacks';
+import { SettingsStack } from '@navigation/stacks/SettingsStack';
 
 const Tab = createBottomTabNavigator();
 

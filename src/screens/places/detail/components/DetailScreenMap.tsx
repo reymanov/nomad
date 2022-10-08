@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import MapView, { LatLng, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { Colors } from '@src/constants';
+import { Colors } from '@constants/theme';
 
 interface Props {
     location: LatLng;

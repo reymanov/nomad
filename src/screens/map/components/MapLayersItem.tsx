@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { View, StyleSheet, ImageBackground, ImageSourcePropType, Dimensions } from 'react-native';
 
 import { ThemedText } from '@components/texts';
-import { GenericStyles } from '@constants/index';
+import { GenericStyles } from '@constants/styles';
 
 interface Props {
     title: string;

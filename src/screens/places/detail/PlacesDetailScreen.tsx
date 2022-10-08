@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Row, useColorMode } from 'native-base';
+import { HStack, Row, useColorMode } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Dimensions, Image, StyleSheet, Pressable, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, Pressable, View, Alert, Share } from 'react-native';
 
 import { ThemedText } from '@components/texts';
-import { GenericStyles } from '@constants/index';
-import { ThemedScreenContainer } from '@containers/index';
+import { IconButton } from '@components/buttons';
+import { GenericStyles } from '@constants/styles';
+import { triggerHapticFeedback } from '@utils/Haptic';
 import { ImagesGallery } from './components/ImagesGallery';
 import { PLACES_STACK, TPlacesStack } from '@navigation/types';
+import { ThemedScreenContainer } from '@components/containers';
 import { placesActions, useSelectPlaceById } from '@store/places';
-import { triggerHapticFeedback } from '@utils/Haptic';
-import { EditPlaceButton } from './components/EditPlaceButton';
-import { IconButton } from '@components/buttons/IconButton';
 
 type TRoute = RouteProp<TPlacesStack, PLACES_STACK.PlacesDetail>;
 
@@ -40,7 +39,7 @@ export const PlacesDetailScreen: React.FC = () => {
         triggerHapticFeedback('effectDoubleClick');
     };
 
-    const handleDoubleTap = () => {
+    const onDoubleTap = () => {
         const now = Date.now();
         const DOUBLE_PRESS_DELAY = 300;
 
@@ -48,24 +47,52 @@ export const PlacesDetailScreen: React.FC = () => {
         else setLastTap(now);
     };
 
+    const onDelete = () => {
+        Alert.alert(`Delete ${name} `, 'Are you sure you want to delete this place?', [
+            { text: 'Cancel', style: 'cancel' },
+            {
+                text: 'Delete',
+                style: 'destructive',
+                onPress: () => {
+                    navigation.goBack();
+                    dispatch(placesActions.deletePlace(id));
+
+                    setTimeout(() => {
+                        Alert.alert('Place deleted', `${name} has been deleted successfully`);
+                    }, 200);
+                },
+            },
+        ]);
+    };
+
+    const onShare = async () => {
+        try {
+            await Share.share({
+                message: `Check out ${name}, It's amazing!`,
+            });
+        } catch (error: any) {
+            console.error('Sharing place error', error);
+        }
+    };
+
     return (
         <ThemedScreenContainer useSafeArea={false}>
             <View style={[styles.header, { top: insets.top }]}>
                 <IconButton
+                    size={30}
+                    name={'chevron-back'}
                     style={styles.back}
                     onPress={() => navigation.goBack()}
-                    icon={'chevron-back'}
-                    size={30}
                 />
 
                 <IconButton
-                    onPress={toggleFavorite}
-                    icon={isFavorite ? 'heart' : 'heart-outline'}
                     size={28}
+                    name={isFavorite ? 'heart' : 'heart-outline'}
+                    onPress={toggleFavorite}
                 />
             </View>
 
-            <Pressable onPress={handleDoubleTap} style={styles.imageContainer}>
+            <Pressable onPress={onDoubleTap} style={styles.imageContainer}>
                 <Image style={styles.image} source={{ uri: images[activeGalleryIndex] }} />
             </Pressable>
 
@@ -73,9 +100,15 @@ export const PlacesDetailScreen: React.FC = () => {
 
             <View style={styles.content}>
                 <Animated.View entering={FadeInDown.duration(500)}>
-                    <EditPlaceButton
-                        onPress={() => navigation.navigate(PLACES_STACK.PlacesEdit, { id })}
-                    />
+                    <HStack style={styles.controls} space={4}>
+                        <IconButton themed={true} name={'share-outline'} onPress={onShare} />
+                        <IconButton
+                            themed={true}
+                            name={'create-outline'}
+                            onPress={() => navigation.navigate(PLACES_STACK.PlacesEdit, { id })}
+                        />
+                        <IconButton themed={true} name={'trash-outline'} onPress={onDelete} />
+                    </HStack>
 
                     <ThemedText fontSize={24} fontWeight={'medium'}>
                         {name}
@@ -121,5 +154,10 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').height * 0.5,
         padding: 16,
         paddingBottom: 48,
+    },
+    controls: {
+        position: 'absolute',
+        right: 80,
+        zIndex: 1,
     },
 });

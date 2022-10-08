@@ -5,9 +5,9 @@ import { Button, Switch, Text, useColorMode } from 'native-base';
 
 // import { writeMapType } from '@utils/Storage';
 // import { mapActions, MapType } from '@store/map/mapSlice';
-import { Colors, Sizes } from '@constants/index';
+import { Colors, Sizes } from '@constants/theme';
 import { ThemedText } from '@components/texts';
-import { ThemedScreenContainer } from '@containers/index';
+import { ThemedScreenContainer } from '@components/containers';
 import { useSelectUserDetails } from '@store/session/useSessionSelectors';
 
 const SettingsScreen = () => {

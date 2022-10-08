@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
+import { HStack } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 
-import { Colors, Sizes } from '@constants/index';
+import { Sizes } from '@constants/theme';
 import { Places } from '@constants/data';
 import { ThemedText } from '@components/texts';
-import { ThemedScreenContainer } from '@containers/index';
+import { ThemedScreenContainer } from '@components/containers';
 import { PlacesList } from './components';
-import { PlacesToggle } from '@components/PlacesToggle';
+import { PlacesToggle } from '@components/others';
 import { placesActions } from '@store/places';
 import { PLACES_STACK } from '@navigation/types';
-import { IconButton } from '@src/components/buttons';
+import { IconButton } from '@components/buttons';
 
 export const PlacesListScreen: React.FC = () => {
     const dispatch = useDispatch();
@@ -24,18 +25,18 @@ export const PlacesListScreen: React.FC = () => {
     return (
         <ThemedScreenContainer>
             <View style={styles.header}>
-                <View style={styles.row}>
+                <HStack alignItems={'center'} justifyContent={'space-between'}>
                     <ThemedText fontSize={36} fontWeight={'medium'}>
                         Places
                     </ThemedText>
 
                     <IconButton
-                        icon={'add-circle-outline'}
                         size={32}
                         themed={true}
+                        name={'add-circle-outline'}
                         onPress={() => navigate(PLACES_STACK.PlacesEdit)}
                     />
-                </View>
+                </HStack>
 
                 <PlacesToggle style={styles.toggle} />
             </View>

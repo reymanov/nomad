@@ -1,12 +1,12 @@
 import React from 'react';
 import { useColorMode } from 'native-base';
-import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
 
-import { Colors, HITSLOP } from '@src/constants';
+import { Colors, HITSLOP } from '@constants/theme';
 
 interface Props extends TouchableOpacityProps {
-    icon: string;
+    name: string;
     size?: number;
     color?: string;
     themed?: boolean;
@@ -14,10 +14,10 @@ interface Props extends TouchableOpacityProps {
 }
 
 export const IconButton: React.FC<Props> = ({
-    icon,
-    size,
+    name,
+    size = 26,
     color = Colors.white,
-    themed,
+    themed = true,
     onPress,
     ...props
 }) => {
@@ -27,7 +27,7 @@ export const IconButton: React.FC<Props> = ({
 
     return (
         <TouchableOpacity onPress={onPress} hitSlop={HITSLOP} {...props}>
-            <Icon name={icon} size={size} color={themed ? themedColor : color} />
+            <Icon name={name} size={size} color={themed ? themedColor : color} />
         </TouchableOpacity>
     );
 };

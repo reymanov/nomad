@@ -1,18 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import MapView, { MAP_TYPES, Marker, PROVIDER_GOOGLE, Region } from 'react-native-maps';
 import { useDispatch } from 'react-redux';
 import { throttle } from 'lodash';
 
+import { Colors } from '@constants/theme';
+import { GenericStyles } from '@constants/styles';
+import { dark, retro } from '@constants/mapStyles';
 import { mapActions, MapType } from '@store/map/mapSlice';
 import { useSelectMapStyle } from '@store/map/useMapSelectors';
-import { Colors, dark, GenericStyles, retro } from '@constants/index';
 import { readMapType } from '@utils/Storage';
 import { MapControls } from './MapControls';
 import { TPlace, useSelectActiveVisitType, useSelectPlaces } from '@store/places';
 
-export const Map = () => {
+export const Map: React.FC = () => {
     const [region, setRegion] = useState<Region>();
     const [cameraHeading, setCameraHeading] = useState(0);
     const visitType = useSelectActiveVisitType();
@@ -98,6 +100,14 @@ export const Map = () => {
     const customMapStyle =
         mapStyle === MapType.DARK ? dark : mapStyle === MapType.RETRO ? retro : undefined;
 
+    const filteredPlaces = useMemo(
+        () =>
+            places.filter(place => {
+                return showVisited ? place.isVisited : !place.isVisited;
+            }),
+        [places, showVisited]
+    );
+
     return (
         <>
             <MapView
@@ -112,8 +122,7 @@ export const Map = () => {
                 customMapStyle={customMapStyle}
                 onRegionChange={throttledRegionChange}
             >
-                {places.map(i => {
-                    if ((showVisited && !i.visited) || (!showVisited && i.visited)) return null;
+                {filteredPlaces.map(i => {
                     return (
                         <Marker
                             key={i.id}

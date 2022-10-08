@@ -3,8 +3,9 @@ import { Dimensions, Pressable, StyleSheet, Text, View, ViewProps } from 'react-
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { useDispatch } from 'react-redux';
 
+import { Colors, Sizes } from '@constants/theme';
+import { GenericStyles } from '@constants/styles';
 import { triggerHapticFeedback } from '@utils/Haptic';
-import { GenericStyles, Colors, Sizes } from '@constants/index';
 import { placesActions, useSelectActiveVisitType, VisitType } from '@store/places';
 
 interface Props extends ViewProps {

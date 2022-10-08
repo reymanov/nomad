@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 interface Props {
     style?: StyleProp<ViewStyle>;

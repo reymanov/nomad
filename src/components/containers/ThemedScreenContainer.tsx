@@ -1,6 +1,7 @@
-import { useColorMode, useTheme } from 'native-base';
 import React from 'react';
+import { useColorMode, useTheme } from 'native-base';
 import { StyleProp, View, ViewStyle } from 'react-native';
+
 import { ScreenContainer } from './ScreenContainer';
 
 interface Props {

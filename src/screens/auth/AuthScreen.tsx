@@ -19,9 +19,10 @@ import Animated, {
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import { emailRegex } from '@constants/regex';
 import { AUTH_STACK } from '@navigation/types';
 import { signIn, signUp, updateProfile } from '@utils/Auth';
-import { Fonts, HITSLOP, Sizes, emailRegex, Colors } from '@src/constants';
+import { Fonts, HITSLOP, Sizes, Colors } from '@constants/theme';
 
 export const AuthScreen: React.FC = () => {
     const [isSignInMode, setIsSignInMode] = useState(true);
@@ -135,7 +136,7 @@ export const AuthScreen: React.FC = () => {
                         behavior="padding"
                         keyboardVerticalOffset={-140}
                     >
-                        <Text style={styles.title}>{getTitle}</Text>
+                        <Text style={styles.title}>Michael Hallo</Text>
 
                         <View>
                             {!isSignInMode && (

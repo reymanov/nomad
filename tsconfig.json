@@ -17,17 +17,16 @@
         "esModuleInterop": true,
         "baseUrl": "./",
         "paths": {
-            "@src/*": ["src/*"],
             "@assets/*": ["src/assets/*"],
             "@components/*": ["src/components/*"],
-            "@containers/*": ["src/containers/*"],
             "@constants/*": ["src/constants/*"],
             "@navigation/*": ["src/navigation/*"],
             "@handlers/*": ["src/handlers/*"],
             "@hooks/*": ["src/hooks/*"],
             "@screens/*": ["src/screens/*"],
             "@store/*": ["src/store/*"],
-            "@utils/*": ["src/utils/*"]
+            "@utils/*": ["src/utils/*"],
+            "@src/*": ["src/*"]
         }
     },
     "exclude": ["node_modules", "dist", "**/*.spec.ts", ]

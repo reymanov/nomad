@@ -1,9 +1,11 @@
 import React from 'react';
-import { useColorMode, useTheme } from 'native-base';
 import { StyleSheet, View } from 'react-native';
+import { useColorMode, useTheme } from 'native-base';
+
+import { Sizes } from '@constants/theme';
+import { PlacesToggle } from '@components/others';
+import { GenericStyles } from '@constants/styles';
 import { Map, MapLayersDrawer } from './components';
-import { PlacesToggle } from '@components/PlacesToggle';
-import { GenericStyles, Sizes } from '@constants/index';
 
 const MapScreen: React.FC = () => {
     const { colorMode } = useColorMode();

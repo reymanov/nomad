@@ -42,6 +42,19 @@ export const placesSlice = createSlice({
         setPlacesType: (state, action: PayloadAction<VisitType>) => {
             state.visitType = action.payload;
         },
+        addPlace: (state, action: PayloadAction<TPlace>) => {
+            state.places.push(action.payload);
+        },
+        updatePlace: (state, action: PayloadAction<TPlace>) => {
+            const { id } = action.payload;
+            const place = state.places.find(p => p.id === id);
+            if (!place) return;
+            Object.assign(place, action.payload);
+        },
+        deletePlace: (state, action: PayloadAction<number>) => {
+            const id = action.payload;
+            state.places = state.places.filter(p => p.id !== id);
+        },
     },
 });
 

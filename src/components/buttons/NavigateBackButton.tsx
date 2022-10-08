@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { StyleSheet, Text, TouchableOpacity, View, ViewProps } from 'react-native';
 
-import { HITSLOP, Sizes } from '@constants/index';
+import { HITSLOP, Sizes } from '@constants/theme';
 
 export const NavigateBackButton: React.FC<ViewProps> = ({ ...props }) => {
     const { colors } = useTheme();
