@@ -1,9 +1,8 @@
 import React from 'react';
-import { useColorMode, useTheme } from 'native-base';
+import { Text, useColorMode, useTheme } from 'native-base';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { View, StyleSheet, ImageBackground, ImageSourcePropType, Dimensions } from 'react-native';
 
-import { ThemedText } from '@components/texts';
 import { GenericStyles } from '@constants/styles';
 
 interface Props {
@@ -34,7 +33,7 @@ export const MapLayersItem: React.FC<Props> = ({ title, image, isActive, onPress
                         isActive ? styles.labelActive : {},
                     ]}
                 >
-                    <ThemedText>{title}</ThemedText>
+                    <Text>{title}</Text>
                 </View>
             </ImageBackground>
         </TouchableOpacity>

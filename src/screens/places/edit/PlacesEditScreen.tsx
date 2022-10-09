@@ -1,53 +1,37 @@
 import React, { useState } from 'react';
+import { HStack, Input, Stack, Text, useColorMode, useTheme, VStack } from 'native-base';
 import { Keyboard, Pressable, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch } from 'react-redux';
-import { Formik } from 'formik';
 
-import {
-    FormControl,
-    HStack,
-    Input,
-    Stack,
-    Text,
-    useColorMode,
-    useTheme,
-    VStack,
-} from 'native-base';
-
-import { ThemedText } from '@components/texts';
+import { IconButton } from '@components/buttons';
 import { PlacesToggle } from '@components/others';
-import { placesActions, TPlace, useSelectPlaceById } from '@store/places';
 import { ImagesArea } from './components/ImagesArea';
 import { Colors, Sizes, HITSLOP } from '@constants/theme';
 import { ThemedScreenContainer } from '@components/containers';
 import { PLACES_STACK, TPlacesStack } from '@navigation/types';
+import { placesActions, TPlace, useSelectPlaceById } from '@store/places';
 
 type TRoute = RouteProp<TPlacesStack, PLACES_STACK.PlacesEdit>;
 
 export const PlacesEditScreen: React.FC = () => {
+    const navigation = useNavigation();
     const route = useRoute<TRoute>();
-    const placeId = route.params?.id;
-    const place = useSelectPlaceById(placeId);
+    const place = useSelectPlaceById(route.params?.id);
     const { colorMode } = useColorMode();
     const { colors } = useTheme();
-    const navigation = useNavigation();
     const dispatch = useDispatch();
 
-    const isEditMode = !!placeId;
-    const isDarkMode = colorMode === 'dark';
-    const backgroundColor = isDarkMode ? colors.gray[800] : colors.gray[200];
+    const backgroundColor = colorMode === 'dark' ? colors.gray[800] : colors.gray[200];
+    const isEditMode = !!route.params?.id;
 
-    const [images, setImages] = useState<[] | string[]>(place?.images || []);
+    const [name, setName] = useState<string>(place?.name || '');
+    const [country, setCountry] = useState<string>(place?.country || '');
+    const [description, setDescription] = useState<string>(place?.description || '');
+    const [images, setImages] = useState<string[] | []>(place?.images || []);
     const [isVisited, setIsVisited] = useState<boolean>(place?.isVisited || true);
-    const [descriptionCount, setDescriptionCount] = useState(place?.description.length || 0);
-
-    const initialFormValues: Partial<TPlace> = {
-        name: place?.name || '',
-        country: place?.country || '',
-        description: place?.description || '',
-    };
+    const [isFavorite, setIsFavorite] = useState<boolean>(place?.isFavorite || false);
 
     const onImageAdd = async () => {
         try {
@@ -70,111 +54,108 @@ export const PlacesEditScreen: React.FC = () => {
         setImages(images.filter((image: string) => image !== img));
     };
 
-    const onSave = (values: Partial<TPlace>) => {
-        const place: any = { id: Date.now(), ...values, images, isVisited };
+    const onSave = () => {
+        const newPlace: TPlace = {
+            id: route.params?.id || Date.now(),
+            name,
+            country,
+            description,
+            images,
+            isVisited,
+            isFavorite,
+            position: place?.position || { latitude: 0, longitude: 0 },
+        };
 
-        if (placeId) dispatch(placesActions.updatePlace(place));
-        else dispatch(placesActions.addPlace(place));
-
+        if (isEditMode) dispatch(placesActions.updatePlace(newPlace));
+        else dispatch(placesActions.addPlace(newPlace));
         navigation.goBack();
     };
 
     return (
         <ThemedScreenContainer>
-            <Formik initialValues={initialFormValues} onSubmit={onSave}>
-                {({ handleChange, handleSubmit, values }) => (
-                    <>
-                        <Stack style={styles.header}>
-                            <VStack>
-                                <HStack alignItems={'center'} justifyContent={'space-between'}>
-                                    <ThemedText fontSize={36}>
-                                        {isEditMode ? 'Edit place' : 'New place'}
-                                    </ThemedText>
-                                    <TouchableOpacity hitSlop={HITSLOP} onPress={handleSubmit}>
-                                        <Text
-                                            fontSize={18}
-                                            fontWeight={'medium'}
-                                            color={Colors.primary}
-                                        >
-                                            Save
-                                        </Text>
-                                    </TouchableOpacity>
-                                </HStack>
-                                <ThemedText fontSize={16} fontWeight={'normal'}>
-                                    {isEditMode
-                                        ? 'Edit informations about existing destination'
-                                        : 'Fill in informations about new destination'}
-                                </ThemedText>
-                            </VStack>
+            <Stack style={styles.header}>
+                <VStack>
+                    <HStack alignItems={'center'} justifyContent={'space-between'}>
+                        <Text fontSize={36}>{isEditMode ? 'Edit place' : 'New place'}</Text>
+                        <TouchableOpacity hitSlop={HITSLOP} onPress={onSave}>
+                            <Text fontSize={18} fontWeight={'medium'} color={Colors.primary}>
+                                Save
+                            </Text>
+                        </TouchableOpacity>
+                    </HStack>
+                    <Text fontSize={16} fontWeight={'normal'}>
+                        {isEditMode
+                            ? 'Edit informations about existing destination'
+                            : 'Fill in informations about new destination'}
+                    </Text>
+                </VStack>
+            </Stack>
+
+            <Pressable style={styles.container} onPress={Keyboard.dismiss}>
+                <ScrollView contentContainerStyle={styles.scrollview}>
+                    <PlacesToggle
+                        style={styles.toggle}
+                        active={isVisited ? 'VISITED' : 'TO_VISIT'}
+                        onChange={() => {
+                            setIsVisited(!isVisited);
+                        }}
+                    />
+
+                    <VStack space={4}>
+                        <Stack>
+                            <Text>Name</Text>
+                            <Input
+                                value={name}
+                                onChangeText={setName}
+                                size="lg"
+                                variant={'filled'}
+                                style={{ backgroundColor }}
+                            />
                         </Stack>
-
-                        <Pressable style={styles.container} onPress={Keyboard.dismiss}>
-                            <ScrollView contentContainerStyle={styles.scrollview}>
-                                <PlacesToggle
-                                    active={isVisited ? 'VISITED' : 'TO_VISIT'}
-                                    onChange={() => {
-                                        setIsVisited(!isVisited);
-                                    }}
-                                    style={styles.toggle}
-                                />
-
-                                <VStack space={5}>
-                                    <Stack>
-                                        <FormControl.Label>Name</FormControl.Label>
-                                        <Input
-                                            value={values.name}
-                                            onChangeText={handleChange('name')}
-                                            size="lg"
-                                            variant={'filled'}
-                                            style={{ backgroundColor }}
-                                        />
-                                    </Stack>
-                                    <Stack>
-                                        <FormControl.Label>Country</FormControl.Label>
-                                        <Input
-                                            value={values.country}
-                                            onChangeText={handleChange('country')}
-                                            size="lg"
-                                            variant={'filled'}
-                                            style={{ backgroundColor }}
-                                        />
-                                    </Stack>
-                                    <Stack>
-                                        <FormControl.Label>Description</FormControl.Label>
-                                        <Input
-                                            value={values.description}
-                                            onChangeText={text => {
-                                                handleChange('description')(text);
-                                                setDescriptionCount(text.length);
-                                            }}
-                                            h={'32'}
-                                            size={'lg'}
-                                            maxLength={240}
-                                            variant={'filled'}
-                                            multiline={true}
-                                            style={{ backgroundColor }}
-                                        />
-                                        <FormControl.Label alignSelf={'flex-end'}>
-                                            {descriptionCount}/240
-                                        </FormControl.Label>
-                                    </Stack>
-                                    <Stack>
-                                        <FormControl.Label>Images</FormControl.Label>
-                                        <ImagesArea
-                                            images={images}
-                                            onAdd={onImageAdd}
-                                            onRemove={onImageRemove}
-                                        />
-                                        <FormControl.Label alignSelf={'flex-end'}>
-                                            {images.length}/3
-                                        </FormControl.Label>
-                                    </Stack>
-                                </VStack>
-                            </ScrollView>
-                        </Pressable>
-                    </>
-                )}
-            </Formik>
+                        <Stack>
+                            <Text>Country</Text>
+                            <Input
+                                value={country}
+                                onChangeText={setCountry}
+                                size="lg"
+                                variant={'filled'}
+                                style={{ backgroundColor }}
+                            />
+                        </Stack>
+                        <Stack>
+                            <Text>Description</Text>
+                            <Input
+                                value={description}
+                                onChangeText={setDescription}
+                                h={'32'}
+                                size={'lg'}
+                                maxLength={240}
+                                variant={'filled'}
+                                multiline={true}
+                                style={{ backgroundColor }}
+                            />
+                            <Text style={styles.count}>{description.length}/240</Text>
+                        </Stack>
+                        <HStack style={styles.row}>
+                            <Text>Favorite</Text>
+                            <IconButton
+                                size={28}
+                                name={isFavorite ? 'heart' : 'heart-outline'}
+                                onPress={() => setIsFavorite(!isFavorite)}
+                            />
+                        </HStack>
+                        <Stack>
+                            <Text>Images</Text>
+                            <ImagesArea
+                                images={images}
+                                onAdd={onImageAdd}
+                                onRemove={onImageRemove}
+                            />
+                            <Text style={styles.count}>{images.length}/3</Text>
+                        </Stack>
+                    </VStack>
+                </ScrollView>
+            </Pressable>
         </ThemedScreenContainer>
     );
 };
@@ -193,5 +174,12 @@ const styles = StyleSheet.create({
     toggle: {
         marginTop: 24,
         marginBottom: 16,
+    },
+    row: {
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    count: {
+        alignSelf: 'flex-end',
     },
 });

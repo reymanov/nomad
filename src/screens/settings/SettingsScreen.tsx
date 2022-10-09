@@ -6,7 +6,6 @@ import { Button, Switch, Text, useColorMode } from 'native-base';
 // import { writeMapType } from '@utils/Storage';
 // import { mapActions, MapType } from '@store/map/mapSlice';
 import { Colors, Sizes } from '@constants/theme';
-import { ThemedText } from '@components/texts';
 import { ThemedScreenContainer } from '@components/containers';
 import { useSelectUserDetails } from '@store/session/useSessionSelectors';
 
@@ -36,31 +35,31 @@ const SettingsScreen = () => {
     return (
         <ThemedScreenContainer style={styles.container}>
             <View>
-                <ThemedText fontSize={36} fontWeight={'medium'}>
+                <Text fontSize={36} fontWeight={'medium'}>
                     Settings
-                </ThemedText>
+                </Text>
 
                 <View style={styles.section}>
                     <View style={styles.row}>
-                        <ThemedText fontSize={16} fontWeight={'bold'}>
+                        <Text fontSize={16} fontWeight={'bold'}>
                             Username
-                        </ThemedText>
-                        <ThemedText fontSize={16}>{userDetails.userName}</ThemedText>
+                        </Text>
+                        <Text fontSize={16}>{userDetails.userName}</Text>
                     </View>
 
                     <View style={styles.row}>
-                        <ThemedText fontSize={16} fontWeight={'bold'}>
+                        <Text fontSize={16} fontWeight={'bold'}>
                             Email
-                        </ThemedText>
-                        <ThemedText fontSize={16}>{userDetails.email}</ThemedText>
+                        </Text>
+                        <Text fontSize={16}>{userDetails.email}</Text>
                     </View>
                 </View>
 
                 <View style={styles.section}>
                     <View style={styles.row}>
-                        <ThemedText fontSize={16} fontWeight={'bold'}>
+                        <Text fontSize={16} fontWeight={'bold'}>
                             Dark mode
-                        </ThemedText>
+                        </Text>
                         <Switch
                             onTrackColor={'cyan.600'}
                             isChecked={colorMode === 'dark'}

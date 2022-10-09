@@ -10,6 +10,7 @@ interface Props {
 }
 
 export const ImagesGallery: React.FC<Props> = ({ images, onPress }) => {
+    if (images.length === 1) return null;
     return (
         <View style={styles.container}>
             {images.map((image, index) => {

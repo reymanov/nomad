@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { HStack, Row, useColorMode } from 'native-base';
+import { HStack, Row, Text, useColorMode } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Dimensions, Image, StyleSheet, Pressable, View, Alert, Share } from 'react-native';
 
-import { ThemedText } from '@components/texts';
 import { IconButton } from '@components/buttons';
 import { GenericStyles } from '@constants/styles';
 import { triggerHapticFeedback } from '@utils/Haptic';
@@ -70,8 +69,8 @@ export const PlacesDetailScreen: React.FC = () => {
             await Share.share({
                 message: `Check out ${name}, It's amazing!`,
             });
-        } catch (error: any) {
-            console.error('Sharing place error', error);
+        } catch (e) {
+            console.error(e);
         }
     };
 
@@ -100,7 +99,10 @@ export const PlacesDetailScreen: React.FC = () => {
 
             <View style={styles.content}>
                 <Animated.View entering={FadeInDown.duration(500)}>
-                    <HStack style={styles.controls} space={4}>
+                    <HStack
+                        style={[styles.controls, { right: images.length === 1 ? 0 : 80 }]}
+                        space={4}
+                    >
                         <IconButton themed={true} name={'share-outline'} onPress={onShare} />
                         <IconButton
                             themed={true}
@@ -110,17 +112,17 @@ export const PlacesDetailScreen: React.FC = () => {
                         <IconButton themed={true} name={'trash-outline'} onPress={onDelete} />
                     </HStack>
 
-                    <ThemedText fontSize={24} fontWeight={'medium'}>
+                    <Text fontSize={24} fontWeight={'medium'}>
                         {name}
-                    </ThemedText>
+                    </Text>
                     <Row alignItems={'center'} space={1}>
                         <Icon name={'location'} color={isDarkMode ? '#fff' : '#000'} size={20} />
-                        <ThemedText fontSize={16}>{country}</ThemedText>
+                        <Text fontSize={16}>{country}</Text>
                     </Row>
 
-                    <ThemedText fontSize={16} marginTop={4}>
+                    <Text fontSize={16} marginTop={4}>
                         {description}
-                    </ThemedText>
+                    </Text>
                 </Animated.View>
             </View>
         </ThemedScreenContainer>
@@ -157,7 +159,6 @@ const styles = StyleSheet.create({
     },
     controls: {
         position: 'absolute',
-        right: 80,
         zIndex: 1,
     },
 });

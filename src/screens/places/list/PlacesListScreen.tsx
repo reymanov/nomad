@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
-import { HStack } from 'native-base';
+import { HStack, Text } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 
 import { Sizes } from '@constants/theme';
 import { Places } from '@constants/data';
-import { ThemedText } from '@components/texts';
 import { ThemedScreenContainer } from '@components/containers';
 import { PlacesList } from './components';
 import { PlacesToggle } from '@components/others';
@@ -26,9 +25,9 @@ export const PlacesListScreen: React.FC = () => {
         <ThemedScreenContainer>
             <View style={styles.header}>
                 <HStack alignItems={'center'} justifyContent={'space-between'}>
-                    <ThemedText fontSize={36} fontWeight={'medium'}>
+                    <Text fontSize={36} fontWeight={'medium'}>
                         Places
-                    </ThemedText>
+                    </Text>
 
                     <IconButton
                         size={32}

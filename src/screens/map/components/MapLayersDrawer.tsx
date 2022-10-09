@@ -1,11 +1,10 @@
 import React, { useCallback, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { useColorMode, useTheme } from 'native-base';
+import { Text, useColorMode, useTheme } from 'native-base';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 
 import { MapLayersItem } from './MapLayersItem';
-import { ThemedText } from '@components/texts';
 import { useSelectMapLayersDrawerState, useSelectMapStyle, mapActions, MapType } from '@store/map';
 import { writeMapType } from '@utils/Storage';
 
@@ -56,9 +55,9 @@ export const MapLayersDrawer: React.FC = () => {
             >
                 <View style={styles.content}>
                     <View style={styles.title}>
-                        <ThemedText fontSize={24} fontWeight="medium">
+                        <Text fontSize={24} fontWeight="medium">
                             Select map type
-                        </ThemedText>
+                        </Text>
                     </View>
 
                     <View style={styles.items}>
